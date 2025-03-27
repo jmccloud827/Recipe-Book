@@ -6,14 +6,40 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		30415C202D946E43006A2135 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30415C1F2D946E43006A2135 /* RecipeDetailView.swift */; };
+		3043AE452D7640F900BC3EB4 /* RecipePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */; };
+		30484FE12D6E58DC00EE5682 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE02D6E58DC00EE5682 /* App.swift */; };
+		30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE22D6E58DC00EE5682 /* EditRecipe.swift */; };
+		30484FE52D6E58DD00EE5682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30484FE42D6E58DD00EE5682 /* Assets.xcassets */; };
+		30484FF72D6E598900EE5682 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FF62D6E598900EE5682 /* Recipe.swift */; };
+		30484FFF2D6F48B000EE5682 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FFE2D6F48B000EE5682 /* ImagePicker.swift */; };
+		304852742D721C4A00EE5682 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304852732D721C4A00EE5682 /* TextInputField.swift */; };
+		304852802D7242AA00EE5682 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048527F2D7242AA00EE5682 /* RecipeList.swift */; };
+		304852862D72558100EE5682 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304852852D72558100EE5682 /* RecipeView.swift */; };
+		30A15A922D80A6AD00196CCA /* ToolBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A15A912D80A6AD00196CCA /* ToolBarButton.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		30415C1F2D946E43006A2135 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		30415C222D947531006A2135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePDFView.swift; sourceTree = "<group>"; };
 		30484FDD2D6E58DC00EE5682 /* Recipe Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30484FE02D6E58DC00EE5682 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		30484FE22D6E58DC00EE5682 /* EditRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipe.swift; sourceTree = "<group>"; };
+		30484FE42D6E58DD00EE5682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		30484FF62D6E598900EE5682 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		30484FFE2D6F48B000EE5682 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		304852732D721C4A00EE5682 /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		3048527F2D7242AA00EE5682 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
+		304852852D72558100EE5682 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		30A15A912D80A6AD00196CCA /* ToolBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		30484FDF2D6E58DC00EE5682 /* Recipe Book */ = {
+		30484FF42D6E594500EE5682 /* Preview Content */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Recipe Book";
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -29,10 +55,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30415C162D942CB1006A2135 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30484FF62D6E598900EE5682 /* Recipe.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30415C172D942CD4006A2135 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */,
+				30415C1F2D946E43006A2135 /* RecipeDetailView.swift */,
+				304852732D721C4A00EE5682 /* TextInputField.swift */,
+				30484FFE2D6F48B000EE5682 /* ImagePicker.swift */,
+				30A15A912D80A6AD00196CCA /* ToolBarButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		30415C182D942CF4006A2135 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3048527F2D7242AA00EE5682 /* RecipeList.swift */,
+				304852852D72558100EE5682 /* RecipeView.swift */,
+				30484FE22D6E58DC00EE5682 /* EditRecipe.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		30484FD42D6E58DC00EE5682 = {
 			isa = PBXGroup;
 			children = (
-				30484FDF2D6E58DC00EE5682 /* Recipe Book */,
+				30484FEE2D6E58EA00EE5682 /* Recipe Book */,
 				30484FDE2D6E58DC00EE5682 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +99,20 @@
 				30484FDD2D6E58DC00EE5682 /* Recipe Book.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		30484FEE2D6E58EA00EE5682 /* Recipe Book */ = {
+			isa = PBXGroup;
+			children = (
+				30484FE02D6E58DC00EE5682 /* App.swift */,
+				30415C182D942CF4006A2135 /* Screens */,
+				30415C162D942CB1006A2135 /* Models */,
+				30415C172D942CD4006A2135 /* Views */,
+				30484FE42D6E58DD00EE5682 /* Assets.xcassets */,
+				30415C222D947531006A2135 /* Info.plist */,
+				30484FF42D6E594500EE5682 /* Preview Content */,
+			);
+			path = "Recipe Book";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -61,7 +131,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				30484FDF2D6E58DC00EE5682 /* Recipe Book */,
+				30484FF42D6E594500EE5682 /* Preview Content */,
 			);
 			name = "Recipe Book";
 			packageProductDependencies = (
@@ -94,6 +164,8 @@
 			);
 			mainGroup = 30484FD42D6E58DC00EE5682;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 30484FDE2D6E58DC00EE5682 /* Products */;
 			projectDirPath = "";
@@ -109,6 +181,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30484FE52D6E58DD00EE5682 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +192,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30A15A922D80A6AD00196CCA /* ToolBarButton.swift in Sources */,
+				30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */,
+				30415C202D946E43006A2135 /* RecipeDetailView.swift in Sources */,
+				304852862D72558100EE5682 /* RecipeView.swift in Sources */,
+				30484FE12D6E58DC00EE5682 /* App.swift in Sources */,
+				304852742D721C4A00EE5682 /* TextInputField.swift in Sources */,
+				304852802D7242AA00EE5682 /* RecipeList.swift in Sources */,
+				30484FF72D6E598900EE5682 /* Recipe.swift in Sources */,
+				30484FFF2D6F48B000EE5682 /* ImagePicker.swift in Sources */,
+				3043AE452D7640F900BC3EB4 /* RecipePDFView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +338,7 @@
 				DEVELOPMENT_TEAM = JY83NY58JG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Recipe Book/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -268,7 +352,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jmccloud.Recipe-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -284,6 +368,7 @@
 				DEVELOPMENT_TEAM = JY83NY58JG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Recipe Book/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -297,7 +382,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jmccloud.Recipe-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
