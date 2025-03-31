@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30415C202D946E43006A2135 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30415C1F2D946E43006A2135 /* RecipeDetailView.swift */; };
+		30415C202D946E43006A2135 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30415C1F2D946E43006A2135 /* RecipeDetails.swift */; };
 		3043AE452D7640F900BC3EB4 /* RecipePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */; };
 		30484FE12D6E58DC00EE5682 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE02D6E58DC00EE5682 /* App.swift */; };
 		30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE22D6E58DC00EE5682 /* EditRecipe.swift */; };
@@ -21,7 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		30415C1F2D946E43006A2135 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		30415C1F2D946E43006A2135 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		30415C222D947531006A2135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePDFView.swift; sourceTree = "<group>"; };
 		30484FDD2D6E58DC00EE5682 /* Recipe Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */,
-				30415C1F2D946E43006A2135 /* RecipeDetailView.swift */,
+				30415C1F2D946E43006A2135 /* RecipeDetails.swift */,
 				304852732D721C4A00EE5682 /* TextInputField.swift */,
 				30484FFE2D6F48B000EE5682 /* ImagePicker.swift */,
 				30A15A912D80A6AD00196CCA /* ToolBarButton.swift */,
@@ -194,7 +194,7 @@
 			files = (
 				30A15A922D80A6AD00196CCA /* ToolBarButton.swift in Sources */,
 				30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */,
-				30415C202D946E43006A2135 /* RecipeDetailView.swift in Sources */,
+				30415C202D946E43006A2135 /* RecipeDetails.swift in Sources */,
 				304852862D72558100EE5682 /* RecipeView.swift in Sources */,
 				30484FE12D6E58DC00EE5682 /* App.swift in Sources */,
 				304852742D721C4A00EE5682 /* TextInputField.swift in Sources */,

@@ -23,21 +23,6 @@ public struct ToolbarButton<S: PrimitiveButtonStyle>: View {
         Button {
             code()
         } label: {
-            let symbol =
-                Group {
-                    if let systemName {
-                        Image(systemName: systemName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .fontWeight(.heavy)
-                            .frame(width: 15, height: 15)
-                            .offset(x: offset)
-                    } else {
-                        Image(systemName: "chevron.up")
-                            .frame(width: 15, height: 15)
-                            .opacity(0)
-                    }
-                }
             if color == .white {
                 symbol
                     .foregroundStyle(.foreground)
@@ -50,6 +35,21 @@ public struct ToolbarButton<S: PrimitiveButtonStyle>: View {
         .background(.ultraThickMaterial)
         .clipShape(Circle())
         .frame(width: 30, height: 30)
+    }
+    
+    @ViewBuilder private var symbol: some View {
+        if let systemName {
+            Image(systemName: systemName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .fontWeight(.heavy)
+                .frame(width: 15, height: 15)
+                .offset(x: offset)
+        } else {
+            Image(systemName: "chevron.up")
+                .frame(width: 15, height: 15)
+                .opacity(0)
+        }
     }
 }
 

@@ -16,60 +16,72 @@ struct ImagePicker<Content: View>: View {
             content($showActionSheet)
         }
         .confirmationDialog("How would you like to upload?", isPresented: $showActionSheet) {
-            Button("Camera") {
-                source = .camera
-                showSheet = true
-            }
+            cameraButton
             
-            Button("Photo Library") {
-                source = .photoLibrary
-                showSheet = true
-            }
+            photoLibraryButton
         }
         .fullScreenCover(isPresented: $showSheet) {
-            CameraView(sourceType: source) { uiImage in
-                withAnimation {
-                    self.data = uiImage?.pngData()
-                }
-            }
-            .ignoresSafeArea()
+            cameraView
         }
     }
     
-    private struct CameraView: UIViewControllerRepresentable {
-        @Environment(\.dismiss) var dismiss
-        
-        var sourceType: UIImagePickerController.SourceType
-        var onDidFinish: (UIImage?) -> Void = { _ in }
-        
-        func makeUIViewController(context: Context) -> UIImagePickerController {
-            let imagePicker = UIImagePickerController()
-            imagePicker.sourceType = sourceType
-            imagePicker.delegate = context.coordinator
-            return imagePicker
-        }
-        
-        func updateUIViewController(_: UIImagePickerController, context _: Context) {}
-
-        func makeCoordinator() -> Coordinator {
-            Coordinator(parent: self)
+    private var cameraButton: some View {
+        Button("Camera") {
+            source = .camera
+            showSheet = true
         }
     }
-
-    private class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: CameraView
-        
-        init(parent: CameraView) {
-            self.parent = parent
+    
+    private var photoLibraryButton: some View {
+        Button("Photo Library") {
+            source = .photoLibrary
+            showSheet = true
         }
-        
-        func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            guard let selectedImage = info[.originalImage] as? UIImage else {
-                return
+    }
+    
+    private var cameraView: some View {
+        CameraView(sourceType: source) { uiImage in
+            withAnimation {
+                self.data = uiImage?.pngData()
             }
-            self.parent.onDidFinish(selectedImage)
-            self.parent.dismiss()
         }
+        .ignoresSafeArea()
+    }
+}
+
+private struct CameraView: UIViewControllerRepresentable {
+    @Environment(\.dismiss) var dismiss
+    
+    var sourceType: UIImagePickerController.SourceType
+    var onDidFinish: (UIImage?) -> Void = { _ in }
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = context.coordinator
+        return imagePicker
+    }
+    
+    func updateUIViewController(_: UIImagePickerController, context _: Context) {}
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+}
+
+private class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var parent: CameraView
+    
+    init(parent: CameraView) {
+        self.parent = parent
+    }
+    
+    func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            return
+        }
+        self.parent.onDidFinish(selectedImage)
+        self.parent.dismiss()
     }
 }
 
