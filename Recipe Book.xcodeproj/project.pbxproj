@@ -24,7 +24,7 @@
 		30415C1F2D946E43006A2135 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		30415C222D947531006A2135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePDFView.swift; sourceTree = "<group>"; };
-		30484FDD2D6E58DC00EE5682 /* Recipe Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30484FDD2D6E58DC00EE5682 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30484FE02D6E58DC00EE5682 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		30484FE22D6E58DC00EE5682 /* EditRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipe.swift; sourceTree = "<group>"; };
 		30484FE42D6E58DD00EE5682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		30484FD42D6E58DC00EE5682 = {
 			isa = PBXGroup;
 			children = (
-				30484FEE2D6E58EA00EE5682 /* Recipe Book */,
+				30484FEE2D6E58EA00EE5682 /* App */,
 				30484FDE2D6E58DC00EE5682 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,12 +96,12 @@
 		30484FDE2D6E58DC00EE5682 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30484FDD2D6E58DC00EE5682 /* Recipe Book.app */,
+				30484FDD2D6E58DC00EE5682 /* App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30484FEE2D6E58EA00EE5682 /* Recipe Book */ = {
+		30484FEE2D6E58EA00EE5682 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				30484FE02D6E58DC00EE5682 /* App.swift */,
@@ -112,15 +112,15 @@
 				30415C222D947531006A2135 /* Info.plist */,
 				30484FF42D6E594500EE5682 /* Preview Content */,
 			);
-			path = "Recipe Book";
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30484FDC2D6E58DC00EE5682 /* Recipe Book */ = {
+		30484FDC2D6E58DC00EE5682 /* App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30484FEB2D6E58DD00EE5682 /* Build configuration list for PBXNativeTarget "Recipe Book" */;
+			buildConfigurationList = 30484FEB2D6E58DD00EE5682 /* Build configuration list for PBXNativeTarget "App" */;
 			buildPhases = (
 				30484FD92D6E58DC00EE5682 /* Sources */,
 				30484FDA2D6E58DC00EE5682 /* Frameworks */,
@@ -133,11 +133,11 @@
 			fileSystemSynchronizedGroups = (
 				30484FF42D6E594500EE5682 /* Preview Content */,
 			);
-			name = "Recipe Book";
+			name = App;
 			packageProductDependencies = (
 			);
 			productName = "Recipe Book";
-			productReference = 30484FDD2D6E58DC00EE5682 /* Recipe Book.app */;
+			productReference = 30484FDD2D6E58DC00EE5682 /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -171,7 +171,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30484FDC2D6E58DC00EE5682 /* Recipe Book */,
+				30484FDC2D6E58DC00EE5682 /* App */,
 			);
 		};
 /* End PBXProject section */
@@ -334,7 +334,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Recipe Book/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
 				DEVELOPMENT_TEAM = JY83NY58JG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -364,7 +364,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Recipe Book/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"App/Preview Content\"";
 				DEVELOPMENT_TEAM = JY83NY58JG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -399,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30484FEB2D6E58DD00EE5682 /* Build configuration list for PBXNativeTarget "Recipe Book" */ = {
+		30484FEB2D6E58DD00EE5682 /* Build configuration list for PBXNativeTarget "App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30484FEC2D6E58DD00EE5682 /* Debug */,
