@@ -3,15 +3,24 @@ import SwiftData
 import SwiftUI
 
 @Model class Recipe: Hashable, Identifiable {
-    @Attribute(.unique) var id = UUID()
-    var name: String
-    var tags: Set<Category>
-    var dishDescription: String
+    var id = UUID()
+    var name: String = ""
+    private var tagsBackingData: [Category] = []
+    var dishDescription: String = ""
     var photo: Data?
-    var ingredients: [Ingredient]
-    var steps: [Step]
-    var createdDate: Date
+    var ingredients: [Ingredient] = []
+    var steps: [Step] = []
+    var createdDate: Date = Date.now
     @Transient var uiImage: UIImage?
+    
+    var tags: Set<Category> {
+        get {
+            Set(tagsBackingData)
+        } set {
+            tagsBackingData = Array(newValue)
+        }
+    }
+    
     var pdfURL: URL {
         getPDFURL()
     }
