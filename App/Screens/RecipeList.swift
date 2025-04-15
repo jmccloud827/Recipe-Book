@@ -7,7 +7,9 @@ struct RecipeList: View {
     @Query(sort: \Recipe.createdDate, order: .reverse) private var recipes: [Recipe]
     
     @State private var recipeToAdd: Recipe?
-    @State private var selectedRecipe: Recipe?
+    @State private var recipeToEdit: Recipe?
+    @State private var changedTitle: String? = nil
+    @State private var recipeToView: Recipe?
     @Namespace private var namespace
     
     @State private var showConfirmationDialog = false
@@ -22,13 +24,18 @@ struct RecipeList: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 10) {
                     ForEach(recipes, id: \.id) { recipe in
                         RecipeLink(recipe: recipe, namespace: namespace) { recipe in
-                            selectedRecipe = recipe
+                            recipeToView = recipe
+                        } onSelectEdit: { recipe in
+                            recipeToEdit = recipe
                         }
                     }
                 }
                 .padding()
             }
             .navigationTitle("Recipes")
+            .navigationDestination(item: $recipeToEdit) { recipe in
+                makeEditRecipeDestination(recipe: recipe)
+            }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     bottomBar
@@ -40,13 +47,55 @@ struct RecipeList: View {
                     #endif
                 }
             }
-            .sheet(item: $selectedRecipe) { recipe in
+            .sheet(item: $recipeToView) { recipe in
                 viewRecipeSheet(recipe: recipe)
             }
             .sheet(item: $recipeToAdd) { recipe in
                 addRecipeSheet(recipe: recipe)
             }
         }
+    }
+    
+    private func makeEditRecipeDestination(recipe: Recipe) -> some View {
+        EditRecipe(recipe: recipe)
+            .navigationTitle("Edit \(recipe.name)")
+            .navigationBarBackButtonHidden()
+            .onChange(of: recipe.name, onChangeOfRecipeTitle)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button("Save") {
+                        saveRecipe(recipe: recipe)
+                    }
+                }
+                
+                ToolbarItem(placement: .navigation) {
+                    Button("Cancel", action: cancelEditingRecipe)
+                }
+            }
+    }
+    
+    private func onChangeOfRecipeTitle(oldValue: String, newValue: String) {
+        if oldValue != newValue {
+            changedTitle = oldValue
+        }
+    }
+    
+    private func saveRecipe(recipe: Recipe) {
+        try? modelContext.save()
+        recipeToEdit = nil
+        
+        if let changedTitle {
+            Task {
+                recipe.deleteFromDocumentsDirectory(overrideURL: recipe.getPDFURL(overrideName: changedTitle))
+            }
+        }
+        
+        recipe.saveToDocumentsDirectory()
+    }
+    
+    private func cancelEditingRecipe() {
+        modelContext.rollback()
+        recipeToEdit = nil
     }
     
     private var bottomBar: some View {
@@ -163,9 +212,7 @@ private struct RecipeLink: View {
     let recipe: Recipe
     let namespace: Namespace.ID
     let onSelect: (Recipe) -> Void
-    
-    @State private var isEditing = false
-    @State private var changedTitle: String? = nil
+    let onSelectEdit: (Recipe) -> Void
     
     var body: some View {
         VStack {
@@ -195,9 +242,6 @@ private struct RecipeLink: View {
             Spacer()
         }
         .onAppear(perform: onAppear)
-        .navigationDestination(isPresented: $isEditing) {
-            editRecipeDestination
-        }
     }
     
     @ViewBuilder private var recipeImage: some View {
@@ -221,7 +265,7 @@ private struct RecipeLink: View {
     
     @ViewBuilder private var contextMenuButtons: some View {
         Button {
-            isEditing = true
+            onSelectEdit(recipe)
         } label: {
             Label("Edit", systemImage: "pencil")
         }
@@ -238,46 +282,6 @@ private struct RecipeLink: View {
     @ViewBuilder private var recipeDetails: some View {
         Text(recipe.name)
             .multilineTextAlignment(.center)
-    }
-    
-    private var editRecipeDestination: some View {
-        EditRecipe(recipe: recipe)
-            .navigationTitle("Edit \(recipe.name)")
-            .navigationBarBackButtonHidden()
-            .onChange(of: recipe.name, onChangeOfRecipeTitle)
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button("Save", action: saveRecipe)
-                }
-                
-                ToolbarItem(placement: .navigation) {
-                    Button("Cancel", action: cancelEditingRecipe)
-                }
-            }
-    }
-    
-    private func onChangeOfRecipeTitle(oldValue: String, newValue: String) {
-        if oldValue != newValue {
-            changedTitle = oldValue
-        }
-    }
-    
-    private func saveRecipe() {
-        try? modelContext.save()
-        isEditing = false
-        
-        if let changedTitle {
-            Task {
-                recipe.deleteFromDocumentsDirectory(overrideURL: recipe.getPDFURL(overrideName: changedTitle))
-            }
-        }
-        
-        recipe.saveToDocumentsDirectory()
-    }
-    
-    private func cancelEditingRecipe() {
-        modelContext.rollback()
-        isEditing = false
     }
     
     private func onAppear() {
