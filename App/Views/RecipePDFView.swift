@@ -49,6 +49,6 @@ struct RecipePDFView: View {
 
 #Preview {
     ScrollView {
-        RecipePDFView(recipe: Recipe.exampleRecipe)
+        RecipePDFView(recipe: Recipe.sample)
     }
 }

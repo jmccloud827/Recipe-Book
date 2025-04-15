@@ -85,7 +85,7 @@ import SwiftUI
         }
     }
     
-    @MainActor static let exampleRecipe = Recipe(name: "Garlic Parm Chicken Pasta",
+    @MainActor static let sample = Recipe(name: "Garlic Parm Chicken Pasta",
                                                  tags: Set(Category.allCases),
                                                  dishDescription: "Indulge in a plate of creamy garlic parmesan fettuccine, where al dente ribbons of fettuccine pasta are enveloped in a luscious sauce that strikes the perfect balance between rich and savory. This dish begins with sautéed garlic, which releases its fragrant aroma, then melds with heavy cream, creating a velvety base that's irresistible.\n\nGrated aged Parmesan cheese is gently stirred in, melting into the sauce and lending a nutty depth that perfectly complements the garlic. A hint of freshly cracked black pepper adds a subtle kick, while a sprinkle of fresh parsley provides a pop of color and freshness.\n\nServed with a generous topping of more grated Parmesan and a drizzle of high-quality olive oil, this pasta dish is a comforting classic that invites you to savor each bite. Pair it with a crisp green salad and a glass of white wine for a delightful dining experience that will transport your taste buds to the heart of Italy.",
                                                  photo: UIImage(named: "mock")?.pngData(),

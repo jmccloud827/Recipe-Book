@@ -43,7 +43,7 @@ struct RecipeList: View {
                 
                 ToolbarItem(placement: .automatic) {
                     #if DEBUG
-                    addExampleButton
+                    addSampleButton
                     #endif
                 }
             }
@@ -119,11 +119,11 @@ struct RecipeList: View {
         }
     }
     
-    private var addExampleButton: some View {
-        Button("Add Example") {
-            modelContext.insert(Recipe.exampleRecipe)
+    private var addSampleButton: some View {
+        Button("Sample") {
+            modelContext.insert(Recipe.sample)
             try? modelContext.save()
-            Recipe.exampleRecipe.saveToDocumentsDirectory()
+            Recipe.sample.saveToDocumentsDirectory()
         }
     }
     
@@ -298,7 +298,7 @@ private struct RecipeLink: View {
     
     container.mainContext.insert(Recipe())
     container.mainContext.insert(Recipe())
-    container.mainContext.insert(Recipe.exampleRecipe)
+    container.mainContext.insert(Recipe.sample)
     
     return NavigationStack {
         RecipeList()

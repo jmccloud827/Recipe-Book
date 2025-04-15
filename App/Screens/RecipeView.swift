@@ -167,7 +167,7 @@ struct RecipeView: View {
     let container = try! ModelContainer(for: Recipe.self, configurations: config)
     
     return NavigationStack {
-        RecipeView(recipe: Recipe.exampleRecipe)
+        RecipeView(recipe: Recipe.sample)
     }
     .modelContainer(container)
 }

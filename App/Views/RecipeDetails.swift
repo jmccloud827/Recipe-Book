@@ -105,7 +105,7 @@ struct RecipeDetails: View {
     
     return NavigationStack {
         ScrollView {
-            RecipeDetails(recipe: Recipe.exampleRecipe)
+            RecipeDetails(recipe: Recipe.sample)
         }
     }
     .modelContainer(container)
