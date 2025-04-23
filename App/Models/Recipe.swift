@@ -59,6 +59,7 @@ import SwiftUI
         Task {
             let view = {
                 RecipePDFView(recipe: self)
+                    .tint(.accent)
                     .frame(width: 400)
             }
             

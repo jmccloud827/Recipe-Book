@@ -41,7 +41,7 @@ struct RecipeDetails: View {
     
     private var tagsSection: some View {
         Section {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 5) {
+            HFlow {
                 ForEach(Array(recipe.tags), id: \.self) { item in
                     Button(item.rawValue) {}
                         .buttonStyle(.bordered)
@@ -65,19 +65,21 @@ struct RecipeDetails: View {
     }
     
     private var stepsSection: some View {
-        Section {
-            ForEach(Array(recipe.steps.enumerated()), id: \.offset) { index, step in
-                VStack(alignment: .leading) {
-                    Text("\(index + 1). " + step.name)
-                        .bold()
+        VStack {
+            Section {
+                ForEach(Array(recipe.steps.enumerated()), id: \.offset) { index, step in
+                    VStack(alignment: .leading) {
+                        Text("\(index + 1). " + step.name)
+                            .bold()
                         
-                    Text(step.description)
+                        Text(step.description)
+                    }
+                    .padding(.vertical, 2)
                 }
-                .padding(.vertical, 2)
+            } header: {
+                makeSectionTitle("Steps")
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
-        } header: {
-            makeSectionTitle("Steps")
-                .frame(maxWidth: .infinity, alignment: .center)
         }
         .frame(maxWidth: .infinity, minHeight: 300, alignment: .topLeading)
         .padding(.horizontal)
