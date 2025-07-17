@@ -11,48 +11,48 @@ struct HFlow: Layout {
 
     typealias Cache = [[CGRect]]
 
-    func makeCache(subviews _: Subviews) -> Cache {
+    nonisolated func makeCache(subviews _: Subviews) -> Cache {
         Cache()
     }
-
-    func sizeThatFits(proposal: ProposedViewSize,
-                      subviews: Subviews,
-                      cache: inout Cache) -> CGSize {
+    
+    nonisolated func sizeThatFits(proposal: ProposedViewSize,
+                                  subviews: Subviews,
+                                  cache: inout Cache) -> CGSize {
         cache = []
-
+        
         let width = proposal.width ?? subviews.reduce(0) { max($0, $1.sizeThatFits(proposal).width) }
-
+        
         var offsetX = 0.0
         var offsetY = 0.0
-
+        
         var currentLine: [PartialRect] = []
-
+        
         for subview in subviews {
             let subviewWidth = min(width, subview.sizeThatFits(proposal).width)
-
+            
             if offsetX + subviewWidth > width {
                 offsetY += self.commit(proposal: proposal,
                                        line: currentLine,
                                        offsetY: offsetY,
                                        width: width,
                                        cache: &cache)
-
+                
                 offsetX = 0
                 currentLine = []
             }
-
+            
             let viewWidth = min(width, subview.sizeThatFits(proposal).width)
             let viewHeight = subview.sizeThatFits(proposal).height
-
+            
             currentLine.append(
                 PartialRect(subview: subview,
                             xValue: offsetX,
                             size: CGSize(width: viewWidth,
                                          height: viewHeight)))
-
+            
             offsetX += viewWidth + self.spacing.width
         }
-
+        
         if !currentLine.isEmpty {
             _ = self.commit(proposal: proposal,
                             line: currentLine,
@@ -68,14 +68,14 @@ struct HFlow: Layout {
         let totalHeight = cache.flatMap(\.self).reduce(0) { height, line in
             max(height, line.maxY)
         }
-
+        
         return CGSize(width: totalWidth, height: totalHeight)
     }
-
-    func placeSubviews(in bounds: CGRect,
-                       proposal _: ProposedViewSize,
-                       subviews: Subviews,
-                       cache: inout Cache) {
+    
+    nonisolated func placeSubviews(in bounds: CGRect,
+                                   proposal _: ProposedViewSize,
+                                   subviews: Subviews,
+                                   cache: inout Cache) {
         let allCache = cache.flatMap(\.self)
 
         for (index, subview) in Array(subviews.enumerated()) {
@@ -88,11 +88,11 @@ struct HFlow: Layout {
         }
     }
 
-    private func commit(proposal _: ProposedViewSize,
-                        line: [PartialRect],
-                        offsetY: Double,
-                        width: Double,
-                        cache: inout Cache) -> Double {
+    private nonisolated func commit(proposal _: ProposedViewSize,
+                                    line: [PartialRect],
+                                    offsetY: Double,
+                                    width: Double,
+                                    cache: inout Cache) -> Double {
         let height = line.reduce(0) { max($0, $1.size.height) }
 
         let diffX = width - line.reduce(0) { max($0, $1.xValue + $1.size.width) }
@@ -140,7 +140,7 @@ struct HFlow: Layout {
         return height + self.spacing.height
     }
     
-    private struct PartialRect {
+    private nonisolated struct PartialRect {
         let subview: LayoutSubview
         let xValue: Double
         let size: CGSize

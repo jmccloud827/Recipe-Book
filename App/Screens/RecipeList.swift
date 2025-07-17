@@ -38,12 +38,24 @@ struct RecipeList: View {
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    bottomBar
+                    Text("\(recipes.count) recipe\(recipes.count == 1 ? "" : "s")")
+                        .font(.caption)
+                        .frame(maxWidth: .infinity)
+                }
+                
+                ToolbarSpacer(.fixed, placement: .bottomBar)
+                
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
+                        recipeToAdd = Recipe()
+                    } label: {
+                        Image(systemName: "square.and.pencil")
+                    }
                 }
                 
                 ToolbarItem(placement: .automatic) {
                     #if DEBUG
-                    addSampleButton
+                        addSampleButton
                     #endif
                 }
             }
@@ -63,13 +75,13 @@ struct RecipeList: View {
             .onChange(of: recipe.name, onChangeOfRecipeTitle)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
-                    Button("Save") {
+                    Button("Save", systemImage: "checkmark", role: .confirm) {
                         saveRecipe(recipe: recipe)
                     }
                 }
                 
                 ToolbarItem(placement: .navigation) {
-                    Button("Cancel", action: cancelEditingRecipe)
+                    Button("Cancel", systemImage: "xmark", action: cancelEditingRecipe)
                 }
             }
     }
@@ -96,27 +108,6 @@ struct RecipeList: View {
     private func cancelEditingRecipe() {
         modelContext.rollback()
         recipeToEdit = nil
-    }
-    
-    private var bottomBar: some View {
-        HStack {
-            Button {
-                recipeToAdd = Recipe()
-            } label: {
-                Image(systemName: "square.and.pencil")
-            }
-            .opacity(0)
-            
-            Text("\(recipes.count) recipe\(recipes.count == 1 ? "" : "s")")
-                .font(.caption)
-                .frame(maxWidth: .infinity)
-            
-            Button {
-                recipeToAdd = Recipe()
-            } label: {
-                Image(systemName: "square.and.pencil")
-            }
-        }
     }
     
     private var addSampleButton: some View {
@@ -147,19 +138,19 @@ struct RecipeList: View {
                 .navigationTitle(recipe.name)
                 .toolbar {
                     ToolbarItem(placement: .automatic) {
-                        Button("Done") { saveNewRecipe(recipe: recipe) }
+                        Button("Done", systemImage: "checkmark", role: .confirm) { saveNewRecipe(recipe: recipe) }
                     }
                     
                     ToolbarItem(placement: .navigation) {
-                        Button("Cancel") { cancelNewRecipe(hasChanges: hasChanges) }
+                        Button("Cancel", systemImage: "xmark") { cancelNewRecipe(hasChanges: hasChanges) }
+                            .confirmationDialog("Are you sure you want to this task?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
+                                Button("Discard Changes?", role: .destructive) {
+                                    recipeToAdd = nil
+                                }
+                                
+                                Button("Keep Editing", role: .cancel) {}
+                            }
                     }
-                }
-                .confirmationDialog("Are you sure you want to this task?", isPresented: $showConfirmationDialog, titleVisibility: .visible) {
-                    Button("Discard Changes?", role: .destructive) {
-                        recipeToAdd = nil
-                    }
-                    
-                    Button("Keep Editing", role: .cancel) {}
                 }
         }
         .interactiveDismissDisabled(hasChanges)

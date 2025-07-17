@@ -95,66 +95,25 @@ struct RecipeView: View {
     }
     
     @ViewBuilder private var backButton: some View {
-        let color: Color = isShowingNavBar ? .accentColor : .white
-        Button {
+        Button("Close", systemImage: "xmark") {
             dismiss()
-        } label: {
-            Image(systemName: "chevron.left")
-                .fontWeight(isShowingNavBar ? .semibold : .heavy)
-                .font(isShowingNavBar ? .body : .system(size: 13))
-                .foregroundStyle(color == .white ? colorScheme == .light ? .black : .white : color)
         }
-        .buttonStyle(.borderless)
-        .tint(isShowingNavBar ? .accentColor : .white)
-        .padding(isShowingNavBar ? 0 : 8)
-        .background {
-            ToolbarButton(systemName: nil, color: isShowingNavBar ? .accentColor : .white) {
-                dismiss()
-            }
-            .opacity(!isShowingNavBar ? 1 : 0)
-        }
-        .offset(x: isShowingNavBar ? -8 : 0)
     }
     
     @ViewBuilder private var shareButton: some View {
-        let color: Color = isShowingNavBar ? .accentColor : .white
-        let label =
-            Group {
-                let symbol =
-                    Image(systemName: "square.and.arrow.up")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .fontWeight(.heavy)
-                    .frame(width: 15, height: 15)
-                    .scaleEffect(1.3)
-                Group {
-                    if color == .white {
-                        symbol
-                            .foregroundStyle(.foreground)
-                    } else {
-                        symbol
-                    }
-                }
-            }
+        let label = Image(systemName: "square.and.arrow.up")
             
-        Group {
-            if let previewImage = recipe.uiImage {
-                ShareLink(item: recipe.pdfURL,
-                          preview: SharePreview(recipe.name, image: Image(uiImage: previewImage))) {
-                    label
-                }
-            } else {
-                ShareLink(item: recipe.pdfURL,
-                          preview: SharePreview(recipe.name)) {
-                    label
-                }
+        if let previewImage = recipe.uiImage {
+            ShareLink(item: recipe.pdfURL,
+                      preview: SharePreview(recipe.name, image: Image(uiImage: previewImage))) {
+                label
+            }
+        } else {
+            ShareLink(item: recipe.pdfURL,
+                      preview: SharePreview(recipe.name)) {
+                label
             }
         }
-        .buttonStyle(.bordered)
-        .tint(color)
-        .background(.ultraThickMaterial)
-        .clipShape(Circle())
-        .frame(width: 30, height: 30)
     }
     
     private var isShowingNavBar: Bool {
