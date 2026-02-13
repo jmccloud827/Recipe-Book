@@ -15,7 +15,7 @@ struct ImagePicker<Content: View>: View {
         } label: {
             content($showActionSheet)
         }
-        .confirmationDialog("How would you like to upload?", isPresented: $showActionSheet) {
+        .confirmationDialog("Where would you like to get the image?", isPresented: $showActionSheet) {
             cameraButton
             
             photoLibraryButton

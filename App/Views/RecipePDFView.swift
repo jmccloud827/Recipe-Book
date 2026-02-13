@@ -1,3 +1,5 @@
+import PDFKit
+import QuickLook
 import SwiftData
 import SwiftUI
 
@@ -5,50 +7,167 @@ struct RecipePDFView: View {
     let recipe: Recipe
     
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack(alignment: .bottom) {
-                image
+        VStack(alignment: .leading, spacing: 0) {
+            Group {
+                label
                 
-                title
+                makeSectionTitle("Ingredients")
+                
+                ingredients
+                
+                makeSectionTitle("Steps")
+                
+                steps
             }
-            .frame(height: 300, alignment: .bottom)
+        }
+        .padding(.horizontal, 40)
+        .padding(.top, 40)
+        .background(.white)
+        .colorScheme(.light)
+    }
+    
+    private var label: some View {
+        HStack {
+            if let data = recipe.photo,
+               let uiImage = UIImage(data: data) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipped()
+            }
             
-            RecipeDetails(recipe: recipe)
-        }
-    }
-    
-    @ViewBuilder private var image: some View {
-        if let data = recipe.photo,
-           let uiImage = UIImage(data: data) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        }
-    }
-    
-    private var title: some View {
-        Text(recipe.name)
-            .bold()
-            .font(.title)
-            .foregroundStyle(.foreground.opacity(0.7))
-            .padding(.vertical, 20)
-            .frame(maxWidth: .infinity)
-            .background {
-                ZStack(alignment: .top) {
-                    Rectangle()
-                        .foregroundStyle(.thinMaterial)
-                        .mask(LinearGradient(gradient: Gradient(colors: [.white, .clear]), startPoint: .bottom, endPoint: .top))
-                        
-                    Rectangle()
-                        .foregroundStyle(Gradient(colors: [.clear, .white]))
-                        .opacity(0.5)
+            Spacer()
+            
+            VStack(alignment: .leading) {
+                Text(recipe.name)
+                    .bold()
+                    .font(.title)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                HStack {
+                    Text("Serves: \(recipe.servings)")
+                        .fixedSize(horizontal: false, vertical: true)
+                    
+                    Text("Cook time: \(recipe.cookTimeInMinutes) min")
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
+            
+            Spacer()
+            Spacer()
+        }
+    }
+    
+    private var ingredients: some View {
+        ForEach(recipe.sections, id: \.id) { section in
+            makeSubSectionTitle(section.name)
+                        
+            ForEach(section.ingredients, id: \.id) { ingredient in
+                makeRow {
+                    HStack(alignment: .firstTextBaseline) {
+                        Image(systemName: "square")
+                            
+                        Text(ingredient.makeAttributedString())
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var steps: some View {
+        ForEach(recipe.sections, id: \.id) { section in
+            makeSubSectionTitle(section.name)
+                        
+            ForEach(section.steps.enumerated(), id: \.element.id) { index, step in
+                makeRow {
+                    HStack(alignment: .firstTextBaseline) {
+                        Image(systemName: "\(index + 1).circle.fill")
+                            .foregroundStyle(.blue)
+                            
+                        Text(step.attributedText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+            .environment(section)
+        }
+    }
+    
+    @ViewBuilder private func makeSectionTitle(_ title: String) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(title)
+                .font(.title2)
+                .bold()
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, 10)
+            
+            Rectangle()
+                .fill(.black)
+                .frame(height: 2)
+                .padding(.bottom, 5)
+        }
+    }
+    
+    @ViewBuilder private func makeSubSectionTitle(_ title: String) -> some View {
+        Text(title)
+            .bold()
+            .font(.title3)
+            .foregroundStyle(.gray)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.vertical, 5)
+            .padding(.leading, 15)
+    }
+    
+    private func makeRow(label: () -> some View) -> some View {
+        label()
+            .padding(.vertical, 5)
+            .padding(.leading, 30)
     }
 }
 
-#Preview {
-    ScrollView {
-        RecipePDFView(recipe: Recipe.sample)
+#if DEBUG
+    struct PreviewController: UIViewControllerRepresentable {
+        let pdfURL: URL
+    
+        func makeUIViewController(context: Context) -> QLPreviewController {
+            let controller = QLPreviewController()
+            controller.dataSource = context.coordinator
+            return controller
+        }
+    
+        func updateUIViewController(_: QLPreviewController, context _: Context) {}
+    
+        func makeCoordinator() -> Coordinator {
+            return Coordinator(parent: self)
+        }
+    
+        class Coordinator: QLPreviewControllerDataSource {
+            let parent: PreviewController
+        
+            init(parent: PreviewController) {
+                self.parent = parent
+            }
+        
+            func numberOfPreviewItems(in _: QLPreviewController) -> Int {
+                return 1
+            }
+        
+            func previewController(_: QLPreviewController,
+                                   previewItemAt _: Int) -> QLPreviewItem {
+                return parent.pdfURL as NSURL
+            }
+        }
     }
+#endif
+
+#Preview {
+    @Previewable @State var isPresented = true
+    
+    let recipe = Recipe.palaminoSauce
+    recipe.saveToDocumentsDirectory()
+    
+    return PreviewController(pdfURL: recipe.pdfURL)
+        .ignoresSafeArea()
 }

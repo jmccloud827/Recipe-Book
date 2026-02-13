@@ -5,110 +5,224 @@ import SwiftUI
 struct RecipeDetails: View {
     let recipe: Recipe
     
+    @State private var showTagPopover = false
+    
     var body: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading, spacing: 0) {
-                if !recipe.dishDescription.isEmpty {
-                    descriptionSection
-                }
-                
-                if !recipe.tags.isEmpty {
-                    tagsSection
-                }
-                
-                ingredientsSection
-            }
-            .padding(.horizontal)
-            .padding(.bottom)
+            servingsAndCookTime
             
-            stepsSection
+            ingredients
+            
+            steps
         }
-        .padding(.top)
+        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .background(.background)
     }
     
-    private var descriptionSection: some View {
+    private var servingsAndCookTime: some View {
         Section {
-            GroupBox {
-                Text(recipe.dishDescription)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Group {
+                    VStack {
+                        HStack {
+                            Image(systemName: "person.2.fill")
+                                .foregroundStyle(.gray)
+                            
+                            Text("\(recipe.servings)")
+                        }
+                        
+                        Text("Servings")
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    VStack {
+                        HStack {
+                            Image(systemName: "clock.fill")
+                                .foregroundStyle(.gray)
+                            
+                            Text("\(recipe.cookTimeInMinutes)")
+                        }
+                        
+                        Text("Minutes")
+                    }
+                    .frame(maxWidth: .infinity)
+                       
+                    VStack {
+                        HStack {
+                            Image(systemName: "tag.fill")
+                                .foregroundStyle(.gray)
+                            
+                            Text("\(recipe.tags.count)")
+                        }
+                        
+                        Text("Tags")
+                    }
+                    .onTapGesture {
+                        showTagPopover = true
+                    }
+                    .popover(isPresented: $showTagPopover) {
+                        tags
+                        .padding()
+                        .presentationCompactAdaptation(.popover)
+                    }
+                }
+                .padding(20)
+                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 30))
             }
-        } header: {
-            makeSectionTitle("Description")
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .padding(.bottom)
         }
     }
     
-    private var tagsSection: some View {
-        Section {
-            HFlow {
-                ForEach(Array(recipe.tags), id: \.self) { item in
-                    Button(item.rawValue) {}
-                        .buttonStyle(.bordered)
+    private var tags: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .center) {
+                ForEach(Array(recipe.tags).sorted { $0.rawValue < $1.rawValue }, id: \.self) { item in
+                    Text(item.rawValue)
+                        .foregroundStyle(.accent)
+                        .padding(8)
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(Color(.systemGray5))
+                        }
                 }
             }
-        } header: {
-            makeSectionTitle("Tags")
+            .scrollTargetLayout()
         }
+        .scrollTargetBehavior(.paging)
+        .safeAreaPadding(.horizontal, 20)
     }
     
-    private var ingredientsSection: some View {
+    private var ingredients: some View {
         Section {
-            ForEach(recipe.ingredients, id: \.id) { ingredient in
-                Label(ingredient.name, systemImage: "square")
-                    .padding(.horizontal)
-                    .padding(.vertical, 2)
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(recipe.sections, id: \.id) { section in
+                    Text(section.name)
+                        .bold()
+                    
+                    ForEach(section.ingredients, id: \.id) { ingredient in
+                        makeIngredientLabel(ingredient)
+                    }
+                    .padding(.leading)
+                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+            .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 30))
+            .padding(.bottom)
         } header: {
             makeSectionTitle("Ingredients")
         }
     }
     
-    private var stepsSection: some View {
-        VStack {
-            Section {
-                ForEach(Array(recipe.steps.enumerated()), id: \.offset) { index, step in
-                    VStack(alignment: .leading) {
-                        Text("\(index + 1). " + step.name)
+    private var steps: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(recipe.sections, id: \.id) { section in
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(section.name)
                             .bold()
                         
-                        Text(step.description)
+                        ForEach(section.steps.enumerated(), id: \.element.id) { index, step in
+                            makeStepLabel(step, ingredients: section.ingredients, index: index)
+                        }
                     }
-                    .padding(.vertical, 2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
+                    .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 30))
+                    .environment(section)
                 }
-            } header: {
-                makeSectionTitle("Steps")
-                    .frame(maxWidth: .infinity, alignment: .center)
             }
-        }
-        .frame(maxWidth: .infinity, minHeight: 300, alignment: .topLeading)
-        .padding(.horizontal)
-        .background {
-            Color.accent.opacity(0.2)
-                .clipShape(.rect(topLeadingRadius: 30,
-                                 bottomLeadingRadius: 0,
-                                 bottomTrailingRadius: 0,
-                                 topTrailingRadius: 30))
+        } header: {
+            makeSectionTitle("Steps")
         }
     }
     
+    private func makeIngredientLabel(_ ingredient: Ingredient) -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            Image(systemName: "square")
+            
+            Text(ingredient.makeAttributedString())
+        }
+    }
+    
+    private func makeStepLabel(_ step: Step, ingredients _: [Ingredient], index: Int) -> some View {
+        HStack(alignment: .firstTextBaseline) {
+            Image(systemName: "\(index + 1).circle.fill")
+                .foregroundStyle(.blue)
+            
+            HFlow(spacing: .init(width: 5, height: 0)) {
+                ForEach(step.getWordsWithAttributes().enumerated(), id: \.offset) { _, value in
+                    PopoverView(value: value)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 30))
+    }
+        
     private func makeSectionTitle(_ title: String) -> some View {
         Text(title)
-            .font(.title)
+            .font(.title3)
             .bold()
-            .padding(.top)
             .padding(.bottom, 5)
     }
 }
 
-#Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Recipe.self, configurations: config)
+extension UIFont {
+    static func fractionFont(ofSize pointSize: CGFloat) -> UIFont {
+        let systemFontDesc = UIFont.systemFont(ofSize: pointSize).fontDescriptor
+        let fractionFontDesc = systemFontDesc.addingAttributes(
+            [
+                UIFontDescriptor.AttributeName.featureSettings: [
+                    [
+                        UIFontDescriptor.FeatureKey.type: kFractionsType,
+                        UIFontDescriptor.FeatureKey.selector: kDiagonalFractionsSelector
+                    ]
+                ]
+            ])
+        return UIFont(descriptor: fractionFontDesc, size: pointSize)
+    }
+}
+
+struct PopoverView: View {
+    @Environment(Recipe.Section.self) private var section
+    let value: (word: String, color: Color?)
     
-    return NavigationStack {
-        ScrollView {
-            RecipeDetails(recipe: Recipe.sample)
+    @State private var isShowingPopover = false
+    
+    var body: some View {
+        if let color = value.color {
+            let button =
+                Button(value.word) {
+                    isShowingPopover = true
+                }
+                .tint(color)
+            
+            if color == .accent {
+                button
+                    .popover(isPresented: $isShowingPopover) {
+                        VStack {
+                            ForEach(section.getIngredients(for: value.word), id: \.id) { ingredient in
+                                Text(ingredient.makeAttributedString())
+                            }
+                        }
+                        .padding()
+                        .presentationCompactAdaptation(.popover)
+                    }
+            } else {
+                button
+            }
+        } else {
+            Text(value.word)
         }
     }
-    .modelContainer(container)
+}
+
+#Preview {
+    NavigationStack {
+        RecipeView(recipe: .palaminoSauce)
+    }
 }
