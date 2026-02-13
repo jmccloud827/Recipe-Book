@@ -127,41 +127,6 @@ struct RecipePDFView: View {
     }
 }
 
-#if DEBUG
-    struct PreviewController: UIViewControllerRepresentable {
-        let pdfURL: URL
-    
-        func makeUIViewController(context: Context) -> QLPreviewController {
-            let controller = QLPreviewController()
-            controller.dataSource = context.coordinator
-            return controller
-        }
-    
-        func updateUIViewController(_: QLPreviewController, context _: Context) {}
-    
-        func makeCoordinator() -> Coordinator {
-            return Coordinator(parent: self)
-        }
-    
-        class Coordinator: QLPreviewControllerDataSource {
-            let parent: PreviewController
-        
-            init(parent: PreviewController) {
-                self.parent = parent
-            }
-        
-            func numberOfPreviewItems(in _: QLPreviewController) -> Int {
-                return 1
-            }
-        
-            func previewController(_: QLPreviewController,
-                                   previewItemAt _: Int) -> QLPreviewItem {
-                return parent.pdfURL as NSURL
-            }
-        }
-    }
-#endif
-
 #Preview {
     @Previewable @State var isPresented = true
     
@@ -170,4 +135,37 @@ struct RecipePDFView: View {
     
     return PreviewController(pdfURL: recipe.pdfURL)
         .ignoresSafeArea()
+    
+    struct PreviewController: UIViewControllerRepresentable {
+        let pdfURL: URL
+        
+        func makeUIViewController(context: Context) -> QLPreviewController {
+            let controller = QLPreviewController()
+            controller.dataSource = context.coordinator
+            return controller
+        }
+        
+        func updateUIViewController(_: QLPreviewController, context _: Context) {}
+        
+        func makeCoordinator() -> Coordinator {
+            return Coordinator(parent: self)
+        }
+        
+        class Coordinator: QLPreviewControllerDataSource {
+            let parent: PreviewController
+            
+            init(parent: PreviewController) {
+                self.parent = parent
+            }
+            
+            func numberOfPreviewItems(in _: QLPreviewController) -> Int {
+                return 1
+            }
+            
+            func previewController(_: QLPreviewController,
+                                   previewItemAt _: Int) -> QLPreviewItem {
+                return parent.pdfURL as NSURL
+            }
+        }
+    }
 }
