@@ -5,6 +5,22 @@ extension EnvironmentValues {
     @Entry var canEdit = true
 }
 
+extension UIFont {
+    static func fractionFont(ofSize pointSize: CGFloat) -> UIFont {
+        let systemFontDesc = UIFont.systemFont(ofSize: pointSize).fontDescriptor
+        let fractionFontDesc = systemFontDesc.addingAttributes(
+            [
+                UIFontDescriptor.AttributeName.featureSettings: [
+                    [
+                        UIFontDescriptor.FeatureKey.type: kFractionsType,
+                        UIFontDescriptor.FeatureKey.selector: kDiagonalFractionsSelector
+                    ]
+                ]
+            ])
+        return UIFont(descriptor: fractionFontDesc, size: pointSize)
+    }
+}
+
 extension ModelContainer {
     static var previewContainer: ModelContainer {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)

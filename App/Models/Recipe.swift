@@ -97,7 +97,15 @@ import SwiftUI
         try? FileManager.default.removeItem(at: overrideURL ?? pdfURL)
     }
     
-    @MainActor static let samples = [palaminoSauce, pizzaPasta]
+    @MainActor static let samples = [
+        palaminoSauce,
+        pizzaPasta,
+        chorizoSoup,
+        creamyItalianSausageDitalini,
+        chorizoRiceSkillet,
+        shepardsPie,
+        calabrianPasta
+    ]
 }
 
 enum Tag: String, Hashable, CaseIterable, Codable {

@@ -112,6 +112,6 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
 
 #Preview {
     NavigationStack {
-        RecipeView(recipe: .palaminoSauce)
+        ViewRecipe(recipe: .palaminoSauce)
     }
 }

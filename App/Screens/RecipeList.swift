@@ -26,7 +26,7 @@ struct RecipeList: View {
             }
             .fullScreenCover(item: $recipeToView) { recipe in
                 NavigationStack {
-                    RecipeView(recipe: recipe)
+                    ViewRecipe(recipe: recipe)
                 }
                 .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
             }
@@ -50,6 +50,7 @@ private struct RecipeLink: View {
             onSelect(recipe)
         } label: {
             RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(.accent.gradient.opacity(0.5))
                 .overlay {
                     recipeImage
                 }

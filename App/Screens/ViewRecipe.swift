@@ -1,13 +1,55 @@
-import PDFKit
 import SwiftData
 import SwiftUI
 
-struct RecipeDetails: View {
-    let recipe: Recipe
+struct ViewRecipe: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.canEdit) private var canEdit
+    
+    @Bindable var recipe: Recipe
     
     @State private var showTagPopover = false
     
     var body: some View {
+        FancyHeader(title: recipe.name) {
+            details
+        } label: {
+            title
+                .padding()
+                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 20))
+        } background: {
+            image
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                backButton
+            }
+            
+            ToolbarItem {
+                optionsMenu
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder private var image: some View {
+        if let uiImage = recipe.uiImage {
+            Image(uiImage: uiImage)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        } else {
+            Rectangle()
+                .foregroundStyle(Color.accent.gradient)
+        }
+    }
+    
+    private var title: some View {
+        Text(recipe.name)
+            .bold()
+            .font(.title)
+            .multilineTextAlignment(.center)
+    }
+    
+    private var details: some View {
         VStack(alignment: .leading) {
             servingsAndCookTime
             
@@ -169,25 +211,43 @@ struct RecipeDetails: View {
             .bold()
             .padding(.bottom, 5)
     }
-}
-
-extension UIFont {
-    static func fractionFont(ofSize pointSize: CGFloat) -> UIFont {
-        let systemFontDesc = UIFont.systemFont(ofSize: pointSize).fontDescriptor
-        let fractionFontDesc = systemFontDesc.addingAttributes(
-            [
-                UIFontDescriptor.AttributeName.featureSettings: [
-                    [
-                        UIFontDescriptor.FeatureKey.type: kFractionsType,
-                        UIFontDescriptor.FeatureKey.selector: kDiagonalFractionsSelector
-                    ]
-                ]
-            ])
-        return UIFont(descriptor: fractionFontDesc, size: pointSize)
+    
+    @ViewBuilder private var backButton: some View {
+        Button("Close", systemImage: "xmark") {
+            dismiss()
+        }
+    }
+    
+    @ViewBuilder private var optionsMenu: some View {
+        Menu {
+            let label = Label("Share", systemImage: "square.and.arrow.up")
+            
+            if let previewImage = recipe.uiImage {
+                ShareLink(item: recipe.pdfURL,
+                          preview: SharePreview(recipe.name, image: Image(uiImage: previewImage))) {
+                    label
+                }
+            } else {
+                ShareLink(item: recipe.pdfURL,
+                          preview: SharePreview(recipe.name)) {
+                    label
+                }
+            }
+            
+            if canEdit {
+                NavigationLink {
+                    EditRecipe(recipe: recipe)
+                } label: {
+                    Label("Edit", systemImage: "pencil")
+                }
+            }
+        } label: {
+            Label("Options", systemImage: "ellipsis")
+        }
     }
 }
 
-struct PopoverView: View {
+private struct PopoverView: View {
     @Environment(Recipe.Section.self) private var section
     let value: (word: String, color: Color?)
     
@@ -223,6 +283,6 @@ struct PopoverView: View {
 
 #Preview {
     NavigationStack {
-        RecipeView(recipe: .palaminoSauce)
+        ViewRecipe(recipe: .palaminoSauce)
     }
 }

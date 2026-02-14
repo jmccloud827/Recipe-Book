@@ -5,7 +5,7 @@ extension Recipe {
         let recipe = Recipe()
         recipe.sections = []
         recipe.name = "Pizza Pasta"
-        recipe.servings = 4
+        recipe.servings = 6
         recipe.cookTimeInMinutes = 25
         recipe.tags = [.dinner, .mainDish]
         recipe.photo = UIImage(named: "pizzaPasta")?.pngData()
@@ -26,14 +26,15 @@ extension Recipe {
         ]
         sauceSection.steps = [
             .init(belongsTo: sauceSection, text: "Get a large pan, add the olive oil and heat on a medium setting. Once warmed add the onions and garlic and sauté for 1-2 minutes"),
-            .init(belongsTo: sauceSection, text: "Next, add the mushrooms and italian sausage and cook until the sausage is browned"),
-            .init(belongsTo: sauceSection, text: "After that add the tomatoes and tomato paste. Then add the itialian seasoning, basil, and oregano. Cover and let it simmer on low heat for 10 minutes"),
+            .init(belongsTo: sauceSection, text: "Next, add the mushrooms and italian sausage and cook until the sausage is browned breaking it apart as it cooks"),
+            .init(belongsTo: sauceSection, text: "After that add the tomatoes and tomato paste. Then add the itialian seasoning, basil, and oregano. Cover and let it simmer on low heat for 10 minutes")
         ]
         
         let pastaSection = Section(belongsTo: recipe)
         pastaSection.name = "Pasta"
         pastaSection.ingredients = [
-            .init(belongsTo: pastaSection, amount: "1", measurement: .box, name: "penne pasta")
+            .init(belongsTo: pastaSection, amount: "1", measurement: .box, name: "penne pasta"),
+            .init(belongsTo: pastaSection, amount: "1", measurement: .pinch, name: "salt")
         ]
         pastaSection.steps = [
             .init(belongsTo: pastaSection, text: "While the sauce is simmering go ahead and cook the penne and remember to add salt to the pot"),

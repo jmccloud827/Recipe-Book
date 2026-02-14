@@ -29,7 +29,8 @@ extension Recipe {
         let pastaSection = Section(belongsTo: recipe)
         pastaSection.name = "Pasta"
         pastaSection.ingredients = [
-            .init(belongsTo: pastaSection, amount: "16", measurement: .ounce, name: "rigatoni pasta")
+            .init(belongsTo: pastaSection, amount: "16", measurement: .ounce, name: "rigatoni pasta"),
+            .init(belongsTo: pastaSection, amount: "1", measurement: .pinch, name: "salt"),
         ]
         pastaSection.steps = [
             .init(belongsTo: pastaSection, text: "While the sauce is simmering go ahead and cook the rigatoni and remember to add salt to the pot"),

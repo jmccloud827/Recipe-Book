@@ -35,9 +35,9 @@ struct RecipePDFView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 100)
                     .clipped()
+                
+                Spacer()
             }
-            
-            Spacer()
             
             VStack(alignment: .leading) {
                 Text(recipe.name)
