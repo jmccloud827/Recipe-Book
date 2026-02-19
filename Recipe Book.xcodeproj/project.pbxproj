@@ -12,6 +12,7 @@
 		3039828A2F40C801002A3B55 /* ChorizoRiceSkillet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303982892F40C801002A3B55 /* ChorizoRiceSkillet.swift */; };
 		3039828C2F40D75F002A3B55 /* ShepardsPie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3039828B2F40D75F002A3B55 /* ShepardsPie.swift */; };
 		3039828E2F40D7F8002A3B55 /* CalabrianPasta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3039828D2F40D7F8002A3B55 /* CalabrianPasta.swift */; };
+		303982902F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3039828F2F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift */; };
 		3043AE452D7640F900BC3EB4 /* RecipePDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */; };
 		30484FE12D6E58DC00EE5682 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE02D6E58DC00EE5682 /* App.swift */; };
 		30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30484FE22D6E58DC00EE5682 /* EditRecipe.swift */; };
@@ -44,6 +45,7 @@
 		303982892F40C801002A3B55 /* ChorizoRiceSkillet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChorizoRiceSkillet.swift; sourceTree = "<group>"; };
 		3039828B2F40D75F002A3B55 /* ShepardsPie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShepardsPie.swift; sourceTree = "<group>"; };
 		3039828D2F40D7F8002A3B55 /* CalabrianPasta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalabrianPasta.swift; sourceTree = "<group>"; };
+		3039828F2F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MozzarellaHerbChickenAndCouscous.swift; sourceTree = "<group>"; };
 		30415C222D947531006A2135 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePDFView.swift; sourceTree = "<group>"; };
 		30484FDD2D6E58DC00EE5682 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				303982892F40C801002A3B55 /* ChorizoRiceSkillet.swift */,
 				3039828B2F40D75F002A3B55 /* ShepardsPie.swift */,
 				3039828D2F40D7F8002A3B55 /* CalabrianPasta.swift */,
+				3039828F2F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				304852742D721C4A00EE5682 /* TextInputField.swift in Sources */,
 				304852802D7242AA00EE5682 /* RecipeList.swift in Sources */,
 				30484FF72D6E598900EE5682 /* Recipe.swift in Sources */,
+				303982902F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift in Sources */,
 				30484FFF2D6F48B000EE5682 /* ImagePicker.swift in Sources */,
 				3043AE452D7640F900BC3EB4 /* RecipePDFView.swift in Sources */,
 				30EF6EC22F3A4080004DCF39 /* Step.swift in Sources */,

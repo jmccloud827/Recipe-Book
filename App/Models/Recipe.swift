@@ -104,7 +104,8 @@ import SwiftUI
         creamyItalianSausageDitalini,
         chorizoRiceSkillet,
         shepardsPie,
-        calabrianPasta
+        calabrianPasta,
+        mozzarellaHerbChickenAndCouscous
     ]
 }
 

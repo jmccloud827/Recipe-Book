@@ -13,7 +13,7 @@ extension Recipe {
         let methodSection = Section(belongsTo: recipe)
         methodSection.name = "Method"
         methodSection.ingredients = [
-            .init(belongsTo: methodSection, amount: "1", measurement: .pound, name: "italian sausage"),
+            .init(belongsTo: methodSection, amount: "1", measurement: .pound, name: "Italian sausage"),
             .init(belongsTo: methodSection, amount: "1", measurement: .item, name: "onion (diced)"),
             .init(belongsTo: methodSection, amount: "2", measurement: .item, name: "garlic cloves (minced)"),
             .init(belongsTo: methodSection, amount: "1", measurement: .teaspoon, name: "fennel (ground, optional)"),
@@ -21,7 +21,7 @@ extension Recipe {
             .init(belongsTo: methodSection, amount: "4", measurement: .cup, name: "chicken broth"),
             .init(belongsTo: methodSection, amount: "1", measurement: .can, name: "tomatoes (petite, diced)"),
             .init(belongsTo: methodSection, amount: "1", measurement: .box, name: "ditalini pasta"),
-            .init(belongsTo: methodSection, amount: "1", measurement: .teaspoon, name: "italian seasoning"),
+            .init(belongsTo: methodSection, amount: "1", measurement: .teaspoon, name: "Italian seasoning"),
             .init(belongsTo: methodSection, amount: "1/2", measurement: .cup, name: "parmesan cheese (grated)"),
             .init(belongsTo: methodSection, amount: "4", measurement: .ounce, name: "cream cheese"),
             .init(belongsTo: methodSection, amount: "1/4", measurement: .cup, name: "heavy cream"),

@@ -38,7 +38,7 @@ extension Recipe {
             .init(belongsTo: sauceSection, amount: "1/2", measurement: .cup, name: "basil"),
         ]
         sauceSection.steps = [
-            .init(belongsTo: sauceSection, text: "Get a large saucepan, add olive oil, ad heat on a medium setting. Sear the beef until browned"),
+            .init(belongsTo: sauceSection, text: "Get a large saucepan, add olive oil, and heat on a medium setting. Sear the beef until browned"),
             .init(belongsTo: sauceSection, text: "Add butter, garlic, and shrimp until pink and opaque"),
             .init(belongsTo: sauceSection, text: "Add calabrian paste, lemon juice, heavy cream, pasta water, and tomato paste. Bring to a boil, reduce heat and let it simmer for 5 minutes"),
             .init(belongsTo: sauceSection, text: "Add the parmesan and wait for it to melt then add the basil"),

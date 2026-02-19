@@ -63,8 +63,11 @@ private struct TextInputFieldDestination: View {
     var body: some View {
         List {
             HStack {
-                TextField(previousText, text: $text, axis: .vertical)
+                TextField(previousText, text: $text)
                     .focused($focus)
+                    .onSubmit {
+                        dismiss()
+                    }
                 
                 Spacer()
                 

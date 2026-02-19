@@ -104,8 +104,10 @@ private struct RecipeLink: View {
 }
 
 #Preview {
-    NavigationStack {
+    let container = ModelContainer.previewContainer
+    
+    return NavigationStack {
         Dashboard()
     }
-    .modelContainer(.previewContainer)
+    .modelContainer(container)
 }

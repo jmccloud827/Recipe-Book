@@ -14,20 +14,20 @@ extension Recipe {
         sauceSection.name = "Sauce"
         sauceSection.ingredients = [
             .init(belongsTo: sauceSection, amount: "2", measurement: .tablespoon, name: "olive oil"),
-            .init(belongsTo: sauceSection, amount: "1", measurement: .pound, name: "italian sausage"),
+            .init(belongsTo: sauceSection, amount: "1", measurement: .pound, name: "Italian sausage"),
             .init(belongsTo: sauceSection, amount: "1", measurement: .item, name: "onion (diced)"),
             .init(belongsTo: sauceSection, amount: "1", measurement: .cup, name: "mushrooms (diced)"),
             .init(belongsTo: sauceSection, amount: "2", measurement: .can, name: "tomatoes (petite, diced)"),
             .init(belongsTo: sauceSection, amount: "2", measurement: .can, name: "tomato paste"),
             .init(belongsTo: sauceSection, amount: "1 1/4", measurement: .item, name: "garlic cloves (minced)"),
-            .init(belongsTo: sauceSection, amount: "1", measurement: .tablespoon, name: "italian seasoning"),
+            .init(belongsTo: sauceSection, amount: "1", measurement: .tablespoon, name: "Italian seasoning"),
             .init(belongsTo: sauceSection, amount: "1", measurement: .tablespoon, name: "basil"),
             .init(belongsTo: sauceSection, amount: "1", measurement: .tablespoon, name: "oregano")
         ]
         sauceSection.steps = [
             .init(belongsTo: sauceSection, text: "Get a large pan, add the olive oil and heat on a medium setting. Once warmed add the onions and garlic and sauté for 1-2 minutes"),
-            .init(belongsTo: sauceSection, text: "Next, add the mushrooms and italian sausage and cook until the sausage is browned breaking it apart as it cooks"),
-            .init(belongsTo: sauceSection, text: "After that add the tomatoes and tomato paste. Then add the itialian seasoning, basil, and oregano. Cover and let it simmer on low heat for 10 minutes")
+            .init(belongsTo: sauceSection, text: "Next, add the mushrooms and Italian sausage and cook until the sausage is browned breaking it apart as it cooks"),
+            .init(belongsTo: sauceSection, text: "After that add the tomatoes and tomato paste. Then add the Italian seasoning, basil, and oregano. Cover and let it simmer on low heat for 10 minutes")
         ]
         
         let pastaSection = Section(belongsTo: recipe)
