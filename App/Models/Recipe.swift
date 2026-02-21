@@ -105,7 +105,8 @@ import SwiftUI
         chorizoRiceSkillet,
         shepardsPie,
         calabrianPasta,
-        mozzarellaHerbChickenAndCouscous
+        mozzarellaHerbChickenAndCouscous,
+        sweetSoySalmonBowl
     ]
 }
 

@@ -12,6 +12,7 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     @State private var yOffset = 0.0
     @State private var baseline = 0.0
     @State private var isShowingNavBar = true
+    @State private var isAboveBaseline = false
     
     var body: some View {
         ScrollView {
@@ -28,7 +29,10 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
             if baseline == 0.0 {
                 baseline = newValue
             }
-            if !isShowingNavBar {
+            
+            isAboveBaseline = newValue > baseline
+            
+            if !isAboveBaseline && abs(yOffset + newValue) > 1 {
                 yOffset = newValue
             }
         }
@@ -70,7 +74,7 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     }
     
     @ViewBuilder private var image: some View {
-        if isShowingNavBar {
+        if isAboveBaseline {
             background()
         } else {
             background()

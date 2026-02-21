@@ -29,6 +29,7 @@
 		309C11F22F363FA900EFD143 /* VFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11EB2F363FA900EFD143 /* VFlow.swift */; };
 		309C11F32F363FA900EFD143 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11E92F363FA900EFD143 /* Extensions.swift */; };
 		30A124492F2D3D9B00AC99A0 /* FancyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A124482F2D3D9B00AC99A0 /* FancyHeader.swift */; };
+		30C72AF62F4A1D3A00694B1B /* SweetSoySalmonBowl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C72AF52F4A1D3A00694B1B /* SweetSoySalmonBowl.swift */; };
 		30EF6EBE2F3A4047004DCF39 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EBD2F3A4047004DCF39 /* Section.swift */; };
 		30EF6EC02F3A406B004DCF39 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EBF2F3A406B004DCF39 /* Ingredient.swift */; };
 		30EF6EC22F3A4080004DCF39 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EC12F3A4080004DCF39 /* Step.swift */; };
@@ -64,6 +65,7 @@
 		309C11EA2F363FA900EFD143 /* HFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HFlow.swift; sourceTree = "<group>"; };
 		309C11EB2F363FA900EFD143 /* VFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VFlow.swift; sourceTree = "<group>"; };
 		30A124482F2D3D9B00AC99A0 /* FancyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyHeader.swift; sourceTree = "<group>"; };
+		30C72AF52F4A1D3A00694B1B /* SweetSoySalmonBowl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetSoySalmonBowl.swift; sourceTree = "<group>"; };
 		30EF6EBD2F3A4047004DCF39 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		30EF6EBF2F3A406B004DCF39 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		30EF6EC12F3A4080004DCF39 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				3039828B2F40D75F002A3B55 /* ShepardsPie.swift */,
 				3039828D2F40D7F8002A3B55 /* CalabrianPasta.swift */,
 				3039828F2F4276E1002A3B55 /* MozzarellaHerbChickenAndCouscous.swift */,
+				30C72AF52F4A1D3A00694B1B /* SweetSoySalmonBowl.swift */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				30F6A0622F3E592C000CC7EF /* PizzaPasta.swift in Sources */,
 				30484FE32D6E58DC00EE5682 /* EditRecipe.swift in Sources */,
 				30EF6EC02F3A406B004DCF39 /* Ingredient.swift in Sources */,
+				30C72AF62F4A1D3A00694B1B /* SweetSoySalmonBowl.swift in Sources */,
 				3039828A2F40C801002A3B55 /* ChorizoRiceSkillet.swift in Sources */,
 				30A124492F2D3D9B00AC99A0 /* FancyHeader.swift in Sources */,
 				304852862D72558100EE5682 /* ViewRecipe.swift in Sources */,
