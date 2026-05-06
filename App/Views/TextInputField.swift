@@ -99,15 +99,9 @@ private struct TextInputFieldDestination: View {
         .labelStyle(.iconOnly)
     }
     
-    @ViewBuilder private var confirmButton: some View {
-        if #available(iOS 26.0, *) {
-            Button(role: .confirm) {
-                dismiss()
-            }
-        } else {
-            Button("Done") {
-                dismiss()
-            }
+    private var confirmButton: some View {
+        Button(role: .confirm) {
+            dismiss()
         }
     }
     

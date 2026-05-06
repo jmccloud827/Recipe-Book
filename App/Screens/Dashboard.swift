@@ -11,13 +11,23 @@ struct Dashboard: View {
     var body: some View {
         NavigationStack {
             RecipeList(recipes: recipes)
-            .navigationTitle("Recipes")
-            .toolbar {
-                bottomBar
-            }
-            .fullScreenCover(isPresented: $showAddRecipeSheet) {
-                AddRecipe()
-            }
+                .navigationTitle("Recipes")
+                .toolbar {
+                    bottomBar
+                    
+                    ToolbarItem {
+                        Button("Add Samples") {
+                            for sample in Recipe.samples {
+                                modelContext.insert(sample)
+                            }
+                            
+                            try? modelContext.save()
+                        }
+                    }
+                }
+                .fullScreenCover(isPresented: $showAddRecipeSheet) {
+                    AddRecipe()
+                }
         }
     }
     

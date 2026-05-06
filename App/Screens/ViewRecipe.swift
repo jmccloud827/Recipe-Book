@@ -18,6 +18,7 @@ struct ViewRecipe: View {
                 .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 20))
         } background: {
             image
+                .frame(height: 350)
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {

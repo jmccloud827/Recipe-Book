@@ -1,48 +1,46 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct FancyHeader<Content: View, Label: View, Background: View>: View {
     @Environment(\.colorScheme) private var colorScheme
     
     let title: String
-    @ViewBuilder let content: () -> Content
+    let content: () -> Content
     @ViewBuilder let label: () -> Label
     @ViewBuilder let background: () -> Background
     
-    @State private var baseline = 0.0
-    @State private var isShowingNavBar = true
-    @State private var isAboveBaseline = false
+    @State private var headerYSize = 0.0
+    @State private var isShowingNavBar = false
     
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
                 header
-                
+                    .foregroundStyle(.foreground.opacity(0.7))
+                    .onGeometryChange(for: Double.self) { proxy in
+                        proxy.size.height
+                    } action: { newValue in
+                        self.headerYSize = newValue
+                    }
+                    
                 content()
+                    .overlay {
+                        Color.random()
+                    }
             }
         }
         .edgesIgnoringSafeArea(.top)
-        .onScrollGeometryChange(for: Double.self) { geo in
-            geo.contentOffset.y
+        .onScrollGeometryChange(for: Bool.self) { proxy in
+            proxy.contentOffset.y - headerYSize > -headerYSize * 0.25
         } action: { _, newValue in
-            if baseline == 0.0 {
-                baseline = newValue
-            }
-            
-            isAboveBaseline = newValue > baseline
-        }
-        .onScrollGeometryChange(for: Bool.self) { geo in
-            geo.contentOffset.y > 200
-        } action: { _, newValue in
-            withAnimation {
-                isShowingNavBar = newValue
-            }
+            self.isShowingNavBar = newValue
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(title)
                     .bold()
                     .opacity(isShowingNavBar ? 1 : 0)
+                    .animation(.default, value: isShowingNavBar)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -50,19 +48,10 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     
     @ViewBuilder private var header: some View {
         Section {} header: {
-            Group {
-                if #available(iOS 26.0, *) {
-                    ZStack {
-                        image
-                        
-                        titleView
-                            .foregroundStyle(.foreground.opacity(0.7))
-                    }
-
-                } else {
-                    titleView
-                        .foregroundStyle(.foreground)
-                }
+            ZStack {
+                image
+                
+                titleView
             }
         }
     }
@@ -76,28 +65,21 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
         VStack {
             Spacer()
             
-            let label =
-                label()
+            label()
                 .padding(.horizontal)
                 .padding(.vertical, 20)
                 .frame(maxWidth: .infinity, alignment: .bottom)
-            
-            if #available(iOS 26.0, *) {
-                label
-                    .background {
-                        ZStack(alignment: .top) {
-                            Rectangle()
-                                .foregroundStyle(.thinMaterial)
-                                .mask(LinearGradient(gradient: Gradient(colors: [colorScheme == .light ? .white : .black, .clear]), startPoint: .bottom, endPoint: .top))
-                                
-                            Rectangle()
-                                .foregroundStyle(Gradient(colors: [.clear, colorScheme == .light ? .white : .black]))
-                                .opacity(0.5)
-                        }
+                .background {
+                    ZStack(alignment: .top) {
+                        Rectangle()
+                            .foregroundStyle(.thinMaterial)
+                            .mask(LinearGradient(gradient: Gradient(colors: [colorScheme == .light ? .white : .black, .clear]), startPoint: .bottom, endPoint: .top))
+                            
+                        Rectangle()
+                            .foregroundStyle(Gradient(colors: [.clear, colorScheme == .light ? .white : .black]))
+                            .opacity(0.5)
                     }
-            } else {
-                label
-            }
+                }
         }
         .frame(maxWidth: .infinity, alignment: .bottom)
         .animation(.none, value: UUID())
@@ -114,10 +96,8 @@ extension View {
             let newHeight = currentHeight + positiveOffset
             let scaleFactor = newHeight / currentHeight
             
-            return effect.scaleEffect(
-                x: scaleFactor, y: scaleFactor,
-                anchor: .bottom
-            )
+            return effect.scaleEffect(x: scaleFactor, y: scaleFactor,
+                                      anchor: .bottom)
         }
     }
 }
