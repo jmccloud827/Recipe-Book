@@ -9,7 +9,6 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     @ViewBuilder let label: () -> Label
     @ViewBuilder let background: () -> Background
     
-    @State private var yOffset = 0.0
     @State private var baseline = 0.0
     @State private var isShowingNavBar = true
     @State private var isAboveBaseline = false
@@ -31,10 +30,6 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
             }
             
             isAboveBaseline = newValue > baseline
-            
-            if !isAboveBaseline && abs(yOffset + newValue) > 1 {
-                yOffset = newValue
-            }
         }
         .onScrollGeometryChange(for: Bool.self) { geo in
             geo.contentOffset.y > 200
@@ -59,7 +54,6 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
                 if #available(iOS 26.0, *) {
                     ZStack {
                         image
-                            .frame(height: 350, alignment: .bottom)
                         
                         titleView
                             .foregroundStyle(.foreground.opacity(0.7))
@@ -74,12 +68,8 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     }
     
     @ViewBuilder private var image: some View {
-        if isAboveBaseline {
-            background()
-        } else {
-            background()
-                .scaleEffect(max(1, 1 + (-yOffset * 0.003)), anchor: .bottom)
-        }
+        background()
+            .stretchy()
     }
     
     private var titleView: some View {
@@ -111,6 +101,24 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
         }
         .frame(maxWidth: .infinity, alignment: .bottom)
         .animation(.none, value: UUID())
+    }
+}
+
+extension View {
+    func stretchy() -> some View {
+        visualEffect { effect, geometry in
+            let currentHeight = geometry.size.height
+            let scrollOffset = geometry.frame(in: .scrollView).minY
+            let positiveOffset = max(0, scrollOffset)
+            
+            let newHeight = currentHeight + positiveOffset
+            let scaleFactor = newHeight / currentHeight
+            
+            return effect.scaleEffect(
+                x: scaleFactor, y: scaleFactor,
+                anchor: .bottom
+            )
+        }
     }
 }
 
