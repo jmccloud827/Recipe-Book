@@ -10,6 +10,7 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
     @ViewBuilder let background: () -> Background
     
     @State private var headerYSize = 0.0
+    @State private var safeAreaHeight = 0.0
     @State private var isShowingNavBar = false
     
     var body: some View {
@@ -24,14 +25,16 @@ struct FancyHeader<Content: View, Label: View, Background: View>: View {
                     }
                     
                 content()
-                    .overlay {
-                        Color.random()
-                    }
             }
         }
         .edgesIgnoringSafeArea(.top)
+        .onGeometryChange(for: Double.self) { proxy in
+            proxy.safeAreaInsets.bottom
+        } action: { newValue in
+            safeAreaHeight = newValue + 78
+        }
         .onScrollGeometryChange(for: Bool.self) { proxy in
-            proxy.contentOffset.y - headerYSize > -headerYSize * 0.25
+            proxy.contentOffset.y - headerYSize + safeAreaHeight > 0
         } action: { _, newValue in
             self.isShowingNavBar = newValue
         }
