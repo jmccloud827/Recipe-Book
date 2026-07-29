@@ -8,6 +8,7 @@ import SwiftUI
     var persistedName: String = ""
     var subtext: String = ""
     var createdDate: Date = Date.now
+    var order: Int = 0
     var belongsTo: Recipe.Section?
     
     var name: String {
@@ -47,10 +48,10 @@ import SwiftUI
         let indexOnSlash = self.amount.firstIndex(of: "/")
         var isPlural = false
         if let indexOnSlash {
-            let wholeNumber = self.amount[..<self.name.index(before: indexOnSlash)].trimmingCharacters(in: .whitespacesAndNewlines)
+            let wholeNumber = self.amount[..<self.amount.index(before: indexOnSlash)].trimmingCharacters(in: .whitespacesAndNewlines)
             result += AttributedString(wholeNumber)
-            
-            let fraction = self.amount[self.name.index(before: indexOnSlash)...].trimmingCharacters(in: .whitespacesAndNewlines)
+
+            let fraction = self.amount[self.amount.index(before: indexOnSlash)...].trimmingCharacters(in: .whitespacesAndNewlines)
             var fractionString = AttributedString(" " + fraction)
             fractionString.font = Font(UIFont.fractionFont(ofSize: UIFont.systemFontSize) as CTFont)
             result += fractionString

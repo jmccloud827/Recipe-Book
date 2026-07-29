@@ -5,6 +5,7 @@ import SwiftUI
     var id = UUID()
     var text: String = ""
     var createdDate: Date = Date.now
+    var order: Int = 0
     var belongsTo: Recipe.Section?
     @MainActor var attributedText: AttributedString {
         get {
@@ -30,14 +31,11 @@ import SwiftUI
     }
     
     init(belongsTo: Recipe.Section, text: String) {
-        self.id = id
         self.text = text
         self.belongsTo = belongsTo
     }
-    
+
     init(belongsTo: Recipe.Section) {
-        self.id = id
-        self.text = text
         self.belongsTo = belongsTo
     }
     

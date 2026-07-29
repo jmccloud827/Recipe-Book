@@ -127,6 +127,44 @@ struct RecipePDFView: View {
     }
 }
 
+@MainActor enum RecipePDFExporter {
+    private static let usLetterRect = CGRect(origin: .zero, size: .init(width: 612, height: 792))
+
+    nonisolated static func url(for recipe: Recipe, overrideName: String? = nil) -> URL {
+        URL.documentsDirectory.appending(path: (overrideName ?? recipe.name) + recipe.id.uuidString + ".pdf")
+    }
+
+    static func save(_ recipe: Recipe) {
+        let view = RecipePDFView(recipe: recipe).frame(width: usLetterRect.width)
+
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 3
+
+        guard let uiImage = renderer.uiImage else {
+            return
+        }
+
+        let pdf = PDFDocument()
+
+        let numberOfPages = Int(ceil(uiImage.size.height / usLetterRect.height))
+        for page in 0 ..< numberOfPages {
+            let pageRenderer = ImageRenderer(content: view.frame(height: usLetterRect.height, alignment: .top).offset(y: -usLetterRect.height * Double(page)))
+            pageRenderer.scale = 3
+
+            if let pageImage = pageRenderer.uiImage,
+               let pdfPage = PDFPage(image: pageImage) {
+                pdf.insert(pdfPage, at: pdf.pageCount)
+            }
+        }
+
+        pdf.write(to: url(for: recipe))
+    }
+
+    static func delete(_ recipe: Recipe, overrideURL: URL? = nil) {
+        try? FileManager.default.removeItem(at: overrideURL ?? url(for: recipe))
+    }
+}
+
 #Preview {
     @Previewable @State var isPresented = true
     

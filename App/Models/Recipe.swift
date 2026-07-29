@@ -1,4 +1,3 @@
-import PDFKit
 import SwiftData
 import SwiftUI
 
@@ -9,7 +8,7 @@ import SwiftUI
     var cookTimeInMinutes: Int = 1
     private var persistedTags: [Tag] = []
     var photo: Data?
-    @Relationship(deleteRule: .nullify, inverse: \Section.belongsTo) private var persistedSections: [Section]? = []
+    @Relationship(deleteRule: .cascade, inverse: \Section.belongsTo) private var persistedSections: [Section]? = []
     var createdDate: Date = Date.now
     @Transient var sections: [Section] {
         get {
@@ -50,9 +49,9 @@ import SwiftUI
     var pdfURL: URL {
         getPDFURL()
     }
-    
+
     func getPDFURL(overrideName: String? = nil) -> URL {
-        URL.documentsDirectory.appending(path: overrideName ?? name + id.uuidString + ".pdf")
+        RecipePDFExporter.url(for: self, overrideName: overrideName)
     }
     
     func getIngredientFromID(_ id: UUID) -> Ingredient? {
@@ -68,33 +67,11 @@ import SwiftUI
     }
     
     @MainActor func saveToDocumentsDirectory() {
-        let usLetterRect = CGRect(origin: .zero, size: .init(width: 612, height: 792))
-            
-        let view = RecipePDFView(recipe: self).frame(width: usLetterRect.width)
-            
-        let renderer = ImageRenderer(content: view)
-        renderer.scale = 3
-            
-        if let uiImage = renderer.uiImage {
-            let pdf = PDFDocument()
-                
-            let numberOfPages = Int(uiImage.size.height / usLetterRect.height)
-            for page in 0 ... numberOfPages {
-                let renderer = ImageRenderer(content: view.frame(height: usLetterRect.height, alignment: .top).offset(y: -usLetterRect.height * Double(page)))
-                renderer.scale = 3
-                    
-                if let uiImage = renderer.uiImage,
-                   let page = PDFPage(image: uiImage) {
-                    pdf.insert(page, at: pdf.pageCount)
-                }
-            }
-                
-            pdf.write(to: pdfURL)
-        }
+        RecipePDFExporter.save(self)
     }
-    
+
     @MainActor func deleteFromDocumentsDirectory(overrideURL: URL? = nil) {
-        try? FileManager.default.removeItem(at: overrideURL ?? pdfURL)
+        RecipePDFExporter.delete(self, overrideURL: overrideURL)
     }
     
     @MainActor static let samples = [

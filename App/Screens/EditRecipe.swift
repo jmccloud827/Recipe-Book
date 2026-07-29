@@ -26,20 +26,12 @@ struct EditRecipe: View {
             ForEach(recipe.sections, id: \.id) { section in
                 EditableSection(recipe: recipe, section: section)
             }
-        }
-        .safeAreaInset(edge: .bottom) {
-            Text("Add Section")
-                .padding(.vertical)
-                .frame(maxWidth: .infinity)
-                .background {
-                    RoundedRectangle(cornerRadius: 50)
-                        .foregroundStyle(.bar)
-                }
-                .onTapGesture {
+
+            Section {
+                Button("Add Section", systemImage: "plus") {
                     recipe.sections.append(.init(belongsTo: recipe))
                 }
-                .glassEffect(.regular.interactive())
-                .padding(.horizontal)
+            }
         }
         .toolbar {
             EditButton()

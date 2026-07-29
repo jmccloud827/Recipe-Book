@@ -89,6 +89,10 @@ private struct RecipeLink: View {
                 .resizable()
                 .interpolation(.high)
                 .aspectRatio(contentMode: .fill)
+        } else {
+            Image(systemName: "fork.knife")
+                .font(.system(size: 40))
+                .foregroundStyle(.white.opacity(0.5))
         }
     }
     
