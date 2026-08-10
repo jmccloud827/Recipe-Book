@@ -8,7 +8,7 @@ extension Recipe {
         recipe.servings = 4
         recipe.cookTimeInMinutes = 40
         recipe.tags = [.dinner, .mainDish]
-        recipe.photo = UIImage(named: "sweetSoySalmonBowl")?.pngData()
+        recipe.photo = UIImage(resource: .sweetSoySalmonBowl).pngData()
         
         let glazeSection = Section(belongsTo: recipe)
         glazeSection.name = "Glaze"
@@ -18,14 +18,7 @@ extension Recipe {
             .init(belongsTo: glazeSection, amount: "1/4", measurement: .cup, name: "sugar"),
             .init(belongsTo: glazeSection, amount: "3", measurement: .tablespoon, name: "brown rice vinegar (or rice wine vinegar)"),
             .init(belongsTo: glazeSection, amount: "1", measurement: .tablespoon, name: "water"),
-            .init(belongsTo: glazeSection, amount: "2", measurement: .teaspoon, name: "cornstarch"),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: ""),
-            .init(belongsTo: glazeSection, amount: "", measurement: .item, name: "")
+            .init(belongsTo: glazeSection, amount: "2", measurement: .teaspoon, name: "cornstarch")
         ]
         glazeSection.steps = [
             .init(belongsTo: glazeSection, text: "In a small saucepan over medium heat, whisk the soy sauce, mirin, sugar, and vinegar. Bring to a simmer and cook for 2 to 3 minutes, stirring until the sugar is dissolved."),

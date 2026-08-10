@@ -2,50 +2,27 @@ import SwiftData
 import SwiftUI
 
 struct Dashboard: View {
-    @Environment(\.modelContext) private var modelContext
-    
     @Query(sort: \Recipe.createdDate, order: .reverse) private var recipes: [Recipe]
-    
+
     @State private var showAddRecipeSheet = false
-    
+
     var body: some View {
         NavigationStack {
             RecipeList(recipes: recipes)
                 .navigationTitle("Recipes")
                 .toolbar {
-                    bottomBar
-                    
-                    ToolbarItem {
-                        Button("Add Samples") {
-                            for sample in Recipe.samples {
-                                modelContext.insert(sample)
-                            }
-                            
-                            try? modelContext.save()
-                        }
+                    Button {
+                        showAddRecipeSheet = true
+                    } label: {
+                        Image(systemName: "square.and.pencil")
                     }
                 }
                 .fullScreenCover(isPresented: $showAddRecipeSheet) {
                     AddRecipe()
                 }
-        }
-    }
-    
-    @ToolbarContentBuilder private var bottomBar: some ToolbarContent {
-        ToolbarItem(placement: .bottomBar) {
-            Text("\(recipes.count) recipe\(recipes.count == 1 ? "" : "s")")
-                .font(.caption)
-                .frame(maxWidth: .infinity)
-        }
-        
-        ToolbarSpacer(.fixed, placement: .bottomBar)
-        
-        ToolbarItem(placement: .bottomBar) {
-            Button {
-                showAddRecipeSheet = true
-            } label: {
-                Image(systemName: "square.and.pencil")
-            }
+                .navigationDestination(for: Recipe.self) { recipe in
+                    EditRecipe(recipe: recipe)
+                }
         }
     }
 }

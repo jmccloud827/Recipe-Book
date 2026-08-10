@@ -8,7 +8,7 @@ extension Recipe {
         recipe.servings = 4
         recipe.cookTimeInMinutes = 40
         recipe.tags = [.dinner, .mainDish]
-        recipe.photo = UIImage(named: "mozzarellaHerbChickenAndCouscous")?.pngData()
+        recipe.photo = UIImage(resource: .mozzarellaHerbChickenAndCouscous).pngData()
         
         let methodSection = Section(belongsTo: recipe)
         methodSection.name = "Method"
