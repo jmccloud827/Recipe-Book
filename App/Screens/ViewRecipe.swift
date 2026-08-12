@@ -4,11 +4,13 @@ import SwiftUI
 struct ViewRecipe: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.canEdit) private var canEdit
-    
+
     @Bindable var recipe: Recipe
-    
+
     @State private var showTagPopover = false
-    
+    @State private var shareItem: ShareItem?
+    @State private var isShowingShareError = false
+
     var body: some View {
         FancyHeader(title: recipe.name) {
             details
@@ -24,12 +26,18 @@ struct ViewRecipe: View {
             ToolbarItem(placement: .topBarLeading) {
                 backButton
             }
-            
+
             ToolbarItem {
                 optionsMenu
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $shareItem) { item in
+            ShareSheet(url: item.url)
+        }
+        .alert("Couldn't Create PDF", isPresented: $isShowingShareError) {
+            Button("OK", role: .cancel) {}
+        }
     }
     
     @ViewBuilder private var image: some View {
@@ -221,20 +229,12 @@ struct ViewRecipe: View {
     
     @ViewBuilder private var optionsMenu: some View {
         Menu {
-            let label = Label("Share", systemImage: "square.and.arrow.up")
-            
-            if let previewImage = recipe.uiImage {
-                ShareLink(item: recipe.pdfURL,
-                          preview: SharePreview(recipe.name, image: Image(uiImage: previewImage))) {
-                    label
-                }
-            } else {
-                ShareLink(item: recipe.pdfURL,
-                          preview: SharePreview(recipe.name)) {
-                    label
-                }
+            Button {
+                shareRecipe()
+            } label: {
+                Label("Share", systemImage: "square.and.arrow.up")
             }
-            
+
             if canEdit {
                 NavigationLink {
                     EditRecipe(recipe: recipe)
@@ -246,38 +246,128 @@ struct ViewRecipe: View {
             Label("Options", systemImage: "ellipsis")
         }
     }
+
+    /// Renders the recipe to a PDF right now (nothing is pre-generated or cached to disk) and hands
+    /// the resulting file to the system share sheet.
+    private func shareRecipe() {
+        do {
+            let data = try recipe.makePDFData()
+            let url = FileManager.default.temporaryDirectory
+                .appendingPathComponent(sanitizedFileName)
+                .appendingPathExtension("pdf")
+            try data.write(to: url, options: .atomic)
+            shareItem = ShareItem(url: url)
+        } catch {
+            isShowingShareError = true
+        }
+    }
+
+    private var sanitizedFileName: String {
+        let cleaned = recipe.name
+            .replacingOccurrences(of: "/", with: "-")
+            .replacingOccurrences(of: ":", with: "-")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return cleaned.isEmpty ? "Recipe" : cleaned
+    }
+}
+
+private struct ShareItem: Identifiable {
+    let url: URL
+    var id: URL { url }
+}
+
+/// Wraps the system share sheet so it can be triggered programmatically once the PDF is ready,
+/// rather than requiring `ShareLink` to already hold a pre-rendered item.
+private struct ShareSheet: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        controller.completionWithItemsHandler = { _, _, _, _ in
+            try? FileManager.default.removeItem(at: url)
+        }
+        return controller
+    }
+
+    func updateUIViewController(_: UIActivityViewController, context: Context) {}
 }
 
 private struct PopoverView: View {
     @Environment(Recipe.Section.self) private var section
-    let value: (word: String, color: Color?)
-    
+    let value: Step.WordGroup
+
     @State private var isShowingPopover = false
-    
+
     var body: some View {
+        let phrase = value.words.joined(separator: " ")
+
         if let color = value.color {
             let button =
-                Button(value.word) {
+                Button(phrase) {
                     isShowingPopover = true
                 }
                 .tint(color)
-            
+
             if color == .accent {
                 button
                     .popover(isPresented: $isShowingPopover) {
                         VStack {
-                            ForEach(section.getIngredients(for: value.word), id: \.id) { ingredient in
+                            ForEach(section.getIngredients(for: phrase), id: \.id) { ingredient in
                                 Text(ingredient.makeAttributedString())
                             }
                         }
                         .padding()
                         .presentationCompactAdaptation(.popover)
                     }
+            } else if color == .blue, let durations = value.durations {
+                button
+                    .popover(isPresented: $isShowingPopover) {
+                        TimerPopoverContent(name: phrase, durations: durations)
+                            .padding()
+                            .presentationCompactAdaptation(.popover)
+                    }
             } else {
                 button
             }
         } else {
-            Text(value.word)
+            Text(phrase)
+        }
+    }
+}
+
+private struct TimerPopoverContent: View {
+    let name: String
+    let durations: [Step.ParsedDuration]
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var errorMessage: String?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(durations, id: \.self) { duration in
+                Button("Start \(duration.label) Timer", systemImage: "timer") {
+                    startTimer(for: duration)
+                }
+            }
+
+            if let errorMessage {
+                Text(errorMessage)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+    }
+
+    private func startTimer(for duration: Step.ParsedDuration) {
+        Task {
+            do {
+                try await RecipeTimerManager.shared.startTimer(named: name, duration: duration.timeInterval)
+                dismiss()
+            } catch RecipeTimerManager.TimerError.authorizationDenied {
+                errorMessage = "Allow alarms for Recipe Book in Settings to start timers."
+            } catch {
+                errorMessage = "Couldn't start the timer."
+            }
         }
     }
 }

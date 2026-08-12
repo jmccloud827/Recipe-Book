@@ -6,7 +6,7 @@ struct RecipeList: View {
     
     let recipes: [Recipe]
 
-    @State private var recipeToView: Recipe?
+    @State private var recipeToView: RecipeSelection?
     @Namespace private var namespace
 
     private let samples = Recipe.samples
@@ -34,11 +34,12 @@ struct RecipeList: View {
             }
             .padding(.vertical)
         }
-        .fullScreenCover(item: $recipeToView) { recipe in
+        .fullScreenCover(item: $recipeToView) { selection in
             NavigationStack {
-                ViewRecipe(recipe: recipe)
+                ViewRecipe(recipe: selection.recipe)
             }
-            .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
+            .environment(\.canEdit, selection.canEdit)
+            .navigationTransition(.zoom(sourceID: selection.recipe.id, in: namespace))
         }
     }
 
@@ -56,7 +57,7 @@ struct RecipeList: View {
         HFlow(spacing: .init(width: 20, height: 20), distributeItemsEvenly: true) {
             ForEach(recipes, id: \.id) { recipe in
                 RecipeLink(recipe: recipe, namespace: namespace) { recipe in
-                    recipeToView = recipe
+                    recipeToView = RecipeSelection(recipe: recipe, canEdit: canEdit)
                 }
             }
         }
@@ -64,6 +65,14 @@ struct RecipeList: View {
         .padding(.horizontal)
         .environment(\.canEdit, canEdit)
     }
+}
+
+/// A recipe selected for full-screen viewing, paired with whether it came from a list the user is
+/// allowed to edit — carried alongside the recipe so the presented screen doesn't have to re-derive it.
+private struct RecipeSelection: Identifiable {
+    let recipe: Recipe
+    let canEdit: Bool
+    var id: Recipe.ID { recipe.id }
 }
 
 private struct RecipeLink: View {
@@ -129,7 +138,6 @@ private struct RecipeLink: View {
         Button(role: .destructive) {
             modelContext.delete(recipe)
             try? modelContext.save()
-            recipe.deleteFromDocumentsDirectory()
         } label: {
             Label("Delete", systemImage: "trash")
         }

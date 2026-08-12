@@ -46,14 +46,6 @@ import SwiftUI
         sections.append(.init(belongsTo: self))
     }
     
-    var pdfURL: URL {
-        getPDFURL()
-    }
-
-    func getPDFURL(overrideName: String? = nil) -> URL {
-        RecipePDFExporter.url(for: self, overrideName: overrideName)
-    }
-    
     func getIngredientFromID(_ id: UUID) -> Ingredient? {
         for section in sections {
             for ingredient in section.ingredients {
@@ -62,16 +54,13 @@ import SwiftUI
                 }
             }
         }
-        
+
         return nil
     }
-    
-    @MainActor func saveToDocumentsDirectory() {
-        RecipePDFExporter.save(self)
-    }
 
-    @MainActor func deleteFromDocumentsDirectory(overrideURL: URL? = nil) {
-        RecipePDFExporter.delete(self, overrideURL: overrideURL)
+    /// Renders this recipe to PDF data on demand (nothing is cached to disk ahead of time).
+    @MainActor func makePDFData() throws -> Data {
+        try RecipePDFExporter.pdfData(for: self)
     }
     
     @MainActor static let samples = [

@@ -8,13 +8,7 @@ struct EditRecipe: View {
     @Bindable var recipe: Recipe
     
     @State private var showConfirmationDialog = false
-    @State private var originalName: String
-    
-    init(recipe: Recipe) {
-        self.recipe = recipe
-        self.originalName = recipe.name
-    }
-    
+
     var body: some View {
         Form {
             nameAndTagsSection
@@ -40,11 +34,7 @@ struct EditRecipe: View {
             ToolbarItem(placement: .automatic) {
                 Button("Done", systemImage: "checkmark", role: .confirm) {
                     try? modelContext.save()
-                    
-                    recipe.deleteFromDocumentsDirectory(overrideURL: recipe.getPDFURL(overrideName: originalName))
-                        
-                    recipe.saveToDocumentsDirectory()
-                    
+
                     dismiss()
                 }
             }

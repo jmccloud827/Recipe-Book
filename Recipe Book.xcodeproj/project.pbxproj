@@ -37,6 +37,7 @@
 		30EF6EC82F3A87E6004DCF39 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EC72F3A87E6004DCF39 /* Extension.swift */; };
 		30EF6ED02F3B79FD004DCF39 /* PalaminoSauce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6ECF2F3B79FD004DCF39 /* PalaminoSauce.swift */; };
 		30F6A0622F3E592C000CC7EF /* PizzaPasta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F6A0612F3E592C000CC7EF /* PizzaPasta.swift */; };
+		F1D03AF4E578DD0682021FBD /* RecipeTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		30EF6EC72F3A87E6004DCF39 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		30EF6ECF2F3B79FD004DCF39 /* PalaminoSauce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaminoSauce.swift; sourceTree = "<group>"; };
 		30F6A0612F3E592C000CC7EF /* PizzaPasta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPasta.swift; sourceTree = "<group>"; };
+		8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				30EF6EBD2F3A4047004DCF39 /* Section.swift */,
 				30EF6EBF2F3A406B004DCF39 /* Ingredient.swift */,
 				30EF6EC12F3A4080004DCF39 /* Step.swift */,
+				8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */,
 				30EF6ED12F3B7A0F004DCF39 /* Samples */,
 			);
 			path = Models;
@@ -284,6 +287,7 @@
 				30EF6EBE2F3A4047004DCF39 /* Section.swift in Sources */,
 				30EF6EC42F3A874C004DCF39 /* Dashboard.swift in Sources */,
 				30EF6ED02F3B79FD004DCF39 /* PalaminoSauce.swift in Sources */,
+				F1D03AF4E578DD0682021FBD /* RecipeTimerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,7 +442,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -471,7 +475,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

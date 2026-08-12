@@ -38,11 +38,45 @@ import SwiftUI
         self.belongsTo = belongsTo
     }
     
-    func contains(word: String) -> Bool {
-        let splits = self.name.split(separator: " ")
-        return splits.contains { $0.lowercased().trimmingCharacters(in: .punctuationCharacters) == word.lowercased().trimmingCharacters(in: .punctuationCharacters) }
+    private static func normalize(_ text: some StringProtocol) -> String {
+        text.lowercased().trimmingCharacters(in: .punctuationCharacters)
     }
-    
+
+    /// This ingredient's name split into words. A caller matching against many word positions in a
+    /// loop (e.g. scanning a whole step) should compute this once and pass it to `contains(word:tokens:)`
+    /// / `matchLength(in:at:tokens:)` instead of letting each call re-split `name` from scratch.
+    var nameTokens: [Substring] {
+        self.name.split(separator: " ")
+    }
+
+    func contains(word: String, tokens: [Substring]? = nil) -> Bool {
+        let target = Self.normalize(word)
+        return (tokens ?? nameTokens).contains { Self.normalize($0) == target }
+    }
+
+    /// Returns how many consecutive words in `words`, starting at `index`, spell out this ingredient's
+    /// full name (compared word by word, case-insensitive, ignoring surrounding punctuation).
+    /// Returns 0 if the full name doesn't match starting there.
+    func matchLength(in words: [Substring], at index: Int, tokens: [Substring]? = nil) -> Int {
+        let tokens = tokens ?? nameTokens
+        guard !tokens.isEmpty, index + tokens.count <= words.count else { return 0 }
+
+        for (offset, token) in tokens.enumerated() {
+            if Self.normalize(token) != Self.normalize(words[index + offset]) {
+                return 0
+            }
+        }
+
+        return tokens.count
+    }
+
+    /// Whether `phrase` (one or more space-separated words) spells out this ingredient's full name,
+    /// with nothing left over.
+    func isExactMatch(for phrase: String) -> Bool {
+        let words = phrase.split(separator: " ")
+        return !words.isEmpty && matchLength(in: words, at: 0) == words.count
+    }
+
     @MainActor func makeAttributedString() -> AttributedString {
         var result = AttributedString("")
         let indexOnSlash = self.amount.firstIndex(of: "/")

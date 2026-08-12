@@ -42,7 +42,18 @@ extension Recipe {
         }
         
         func getIngredients(for word: String) -> [Ingredient] {
-            ingredients.filter { $0.contains(word: word) }
+            // Prefer ingredients whose full name matches the tapped word/phrase exactly (e.g. "chicken",
+            // or "chicken stock" once its words are grouped together) over ones where it's just one
+            // component of a longer name. This has to be checked against every ingredient, not just
+            // ones already found via `contains(word:)`, since that only matches single words and would
+            // never find a multi-word phrase like "chicken stock" in the first place.
+            let exactMatches = ingredients.filter { $0.isExactMatch(for: word) }
+
+            if !exactMatches.isEmpty {
+                return exactMatches
+            }
+
+            return ingredients.filter { $0.contains(word: word) }
         }
     }
 }
