@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16FFA3AB3517D51B66EE2E84 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BF4C2CE5600962C251AC5 /* LiveActivity.swift */; };
 		303982862F40C0B4002A3B55 /* CreamyItalianSausageDitalini.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303982852F40C0B4002A3B55 /* CreamyItalianSausageDitalini.swift */; };
 		303982882F40C3B8002A3B55 /* ChorizoSoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303982872F40C3B8002A3B55 /* ChorizoSoup.swift */; };
 		3039828A2F40C801002A3B55 /* ChorizoRiceSkillet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303982892F40C801002A3B55 /* ChorizoRiceSkillet.swift */; };
@@ -37,13 +38,12 @@
 		30EF6EC82F3A87E6004DCF39 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EC72F3A87E6004DCF39 /* Extension.swift */; };
 		30EF6ED02F3B79FD004DCF39 /* PalaminoSauce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6ECF2F3B79FD004DCF39 /* PalaminoSauce.swift */; };
 		30F6A0622F3E592C000CC7EF /* PizzaPasta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F6A0612F3E592C000CC7EF /* PizzaPasta.swift */; };
-		F1D03AF4E578DD0682021FBD /* RecipeTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */; };
+		34D375504A3B0AA322934BD8 /* Widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E3D4D19CDF09D772BD364037 /* Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		65048E7B15EB3A43B4DD7D68 /* ActiveTimersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815ECF89754F7D04F61AEABC /* ActiveTimersView.swift */; };
 		96BE491038CE2B82BB7AC31C /* RecipeTimerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4331B295047F8D212056AA /* RecipeTimerMetadata.swift */; };
 		AF91385292BB44BD15380D40 /* RecipeTimerMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4331B295047F8D212056AA /* RecipeTimerMetadata.swift */; };
-		DEB253475E12B5C0748B3B9A /* RecipeTimerWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3B3C1819A12F28D034FA2 /* RecipeTimerWidgetBundle.swift */; };
-		16FFA3AB3517D51B66EE2E84 /* RecipeTimerLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678BF4C2CE5600962C251AC5 /* RecipeTimerLiveActivity.swift */; };
-		34D375504A3B0AA322934BD8 /* RecipeTimerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E3D4D19CDF09D772BD364037 /* RecipeTimerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		65048E7B15EB3A43B4DD7D68 /* ActiveTimersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815ECF89754F7D04F61AEABC /* ActiveTimersView.swift */; };
+		DEB253475E12B5C0748B3B9A /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E3B3C1819A12F28D034FA2 /* WidgetBundle.swift */; };
+		F1D03AF4E578DD0682021FBD /* RecipeTimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +63,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				34D375504A3B0AA322934BD8 /* RecipeTimerWidgetExtension.appex in Embed Foundation Extensions */,
+				34D375504A3B0AA322934BD8 /* Widget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,13 +104,13 @@
 		30EF6EC72F3A87E6004DCF39 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		30EF6ECF2F3B79FD004DCF39 /* PalaminoSauce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaminoSauce.swift; sourceTree = "<group>"; };
 		30F6A0612F3E592C000CC7EF /* PizzaPasta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPasta.swift; sourceTree = "<group>"; };
-		8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerManager.swift; sourceTree = "<group>"; };
+		40E3B3C1819A12F28D034FA2 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 		4F4331B295047F8D212056AA /* RecipeTimerMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerMetadata.swift; sourceTree = "<group>"; };
-		40E3B3C1819A12F28D034FA2 /* RecipeTimerWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerWidgetBundle.swift; sourceTree = "<group>"; };
-		678BF4C2CE5600962C251AC5 /* RecipeTimerLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerLiveActivity.swift; sourceTree = "<group>"; };
 		5BD472EF4F0BCE59BB1AF104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3D4D19CDF09D772BD364037 /* RecipeTimerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RecipeTimerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		678BF4C2CE5600962C251AC5 /* LiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		815ECF89754F7D04F61AEABC /* ActiveTimersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTimersView.swift; sourceTree = "<group>"; };
+		8AC4B6265D0F99A654838405 /* RecipeTimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTimerManager.swift; sourceTree = "<group>"; };
+		E3D4D19CDF09D772BD364037 /* Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Widget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				30484FEE2D6E58EA00EE5682 /* App */,
-				DC94F08D58FB4E10A26F8D41 /* RecipeTimerWidget */,
+				DC94F08D58FB4E10A26F8D41 /* Widget */,
 				30484FDE2D6E58DC00EE5682 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -183,19 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				30484FDD2D6E58DC00EE5682 /* App.app */,
-				E3D4D19CDF09D772BD364037 /* RecipeTimerWidgetExtension.appex */,
+				E3D4D19CDF09D772BD364037 /* Widget.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		DC94F08D58FB4E10A26F8D41 /* RecipeTimerWidget */ = {
-			isa = PBXGroup;
-			children = (
-				40E3B3C1819A12F28D034FA2 /* RecipeTimerWidgetBundle.swift */,
-				678BF4C2CE5600962C251AC5 /* RecipeTimerLiveActivity.swift */,
-				5BD472EF4F0BCE59BB1AF104 /* Info.plist */,
-			);
-			path = RecipeTimerWidget;
 			sourceTree = "<group>";
 		};
 		30484FEE2D6E58EA00EE5682 /* App */ = {
@@ -241,6 +231,16 @@
 			path = Samples;
 			sourceTree = "<group>";
 		};
+		DC94F08D58FB4E10A26F8D41 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				40E3B3C1819A12F28D034FA2 /* WidgetBundle.swift */,
+				678BF4C2CE5600962C251AC5 /* LiveActivity.swift */,
+				5BD472EF4F0BCE59BB1AF104 /* Info.plist */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,9 +265,9 @@
 			productReference = 30484FDD2D6E58DC00EE5682 /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
-		36DAE958C6C73CDC9D9A2117 /* RecipeTimerWidgetExtension */ = {
+		36DAE958C6C73CDC9D9A2117 /* Widget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C0C8A625EB64D4FEC6CE336F /* Build configuration list for PBXNativeTarget "RecipeTimerWidgetExtension" */;
+			buildConfigurationList = C0C8A625EB64D4FEC6CE336F /* Build configuration list for PBXNativeTarget "Widget" */;
 			buildPhases = (
 				81849B54B42664EF22A1077E /* Sources */,
 				4ACF87388C06DE607D1A233F /* Frameworks */,
@@ -277,11 +277,11 @@
 			);
 			dependencies = (
 			);
-			name = RecipeTimerWidgetExtension;
+			name = Widget;
 			packageProductDependencies = (
 			);
 			productName = RecipeTimerWidgetExtension;
-			productReference = E3D4D19CDF09D772BD364037 /* RecipeTimerWidgetExtension.appex */;
+			productReference = E3D4D19CDF09D772BD364037 /* Widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -319,7 +319,7 @@
 			projectRoot = "";
 			targets = (
 				30484FDC2D6E58DC00EE5682 /* App */,
-				36DAE958C6C73CDC9D9A2117 /* RecipeTimerWidgetExtension */,
+				36DAE958C6C73CDC9D9A2117 /* Widget */,
 			);
 		};
 /* End PBXProject section */
@@ -386,8 +386,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEB253475E12B5C0748B3B9A /* RecipeTimerWidgetBundle.swift in Sources */,
-				16FFA3AB3517D51B66EE2E84 /* RecipeTimerLiveActivity.swift in Sources */,
+				DEB253475E12B5C0748B3B9A /* WidgetBundle.swift in Sources */,
+				16FFA3AB3517D51B66EE2E84 /* LiveActivity.swift in Sources */,
 				AF91385292BB44BD15380D40 /* RecipeTimerMetadata.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,7 +397,7 @@
 /* Begin PBXTargetDependency section */
 		3D364B2ED814CA45D787FE25 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 36DAE958C6C73CDC9D9A2117 /* RecipeTimerWidgetExtension */;
+			target = 36DAE958C6C73CDC9D9A2117 /* Widget */;
 			targetProxy = 4A62BE76F61086228CCA30E3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -598,35 +598,10 @@
 			};
 			name = Release;
 		};
-		59A2F3AD4A408DBEC601E115 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = JY83NY58JG;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RecipeTimerWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Timer";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jmccloud.Recipe-Book.RecipeTimerWidgetExtension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		4722CDCEDA1EAC128AAAA6AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JY83NY58JG;
@@ -643,12 +618,41 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jmccloud.Recipe-Book.RecipeTimerWidgetExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		59A2F3AD4A408DBEC601E115 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JY83NY58JG;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RecipeTimerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Timer";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jmccloud.Recipe-Book.RecipeTimerWidgetExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -671,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C0C8A625EB64D4FEC6CE336F /* Build configuration list for PBXNativeTarget "RecipeTimerWidgetExtension" */ = {
+		C0C8A625EB64D4FEC6CE336F /* Build configuration list for PBXNativeTarget "Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				59A2F3AD4A408DBEC601E115 /* Debug */,
