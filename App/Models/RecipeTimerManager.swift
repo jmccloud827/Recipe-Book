@@ -2,7 +2,9 @@ import AlarmKit
 import SwiftUI
 
 /// Schedules AlarmKit timers for step durations, so a running timer shows up on the Lock Screen,
-/// in the Dynamic Island, and in StandBy just like a timer started from the built-in Clock app.
+/// in the Dynamic Island, and in StandBy just like a timer started from the built-in Clock app —
+/// and keeps a live, in-app list of them so they're visible without leaving the app either.
+@Observable
 @MainActor final class RecipeTimerManager {
     static let shared = RecipeTimerManager()
 
@@ -10,12 +12,24 @@ import SwiftUI
         case authorizationDenied
     }
 
-    /// AlarmKit requires a metadata type even when there's nothing extra to attach to the alarm.
-    private nonisolated struct Metadata: AlarmMetadata {}
+    /// A timer this app started, kept around only for as long as AlarmKit still has a matching alarm
+    /// scheduled. Timers started in a previous app launch won't reappear here after a relaunch — they
+    /// still ring and show on the Lock Screen/Dynamic Island regardless, since that's managed by the
+    /// system, not this list.
+    struct RunningTimer: Identifiable {
+        let id: UUID
+        let name: String
+        let fireDate: Date
+        let stepID: UUID
+    }
 
-    private init() {}
+    private(set) var runningTimers: [RunningTimer] = []
 
-    func startTimer(named name: String, duration: TimeInterval) async throws {
+    private init() {
+        observeAlarms()
+    }
+
+    func startTimer(named name: String, duration: TimeInterval, stepID: UUID) async throws {
         guard try await isAuthorized() else {
             throw TimerError.authorizationDenied
         }
@@ -28,12 +42,31 @@ import SwiftUI
         )
         let countdown = AlarmPresentation.Countdown(title: "\(name)")
         let presentation = AlarmPresentation(alert: alert, countdown: countdown, paused: nil)
-        let attributes = AlarmAttributes<Metadata>(presentation: presentation, metadata: nil, tintColor: .accent)
+        let attributes = AlarmAttributes<RecipeTimerMetadata>(presentation: presentation, metadata: nil, tintColor: .accent)
 
+        let id = UUID()
         _ = try await AlarmManager.shared.schedule(
-            id: UUID(),
+            id: id,
             configuration: .timer(duration: duration, attributes: attributes)
         )
+
+        runningTimers.append(RunningTimer(id: id, name: name, fireDate: Date.now.addingTimeInterval(duration), stepID: stepID))
+    }
+
+    func stopTimer(id: UUID) {
+        try? AlarmManager.shared.stop(id: id)
+        runningTimers.removeAll { $0.id == id }
+    }
+
+    /// Drops any timer from the list once AlarmKit no longer has a matching alarm — e.g. it was
+    /// stopped from the Lock Screen/Dynamic Island instead of from here.
+    private func observeAlarms() {
+        Task {
+            for await alarms in AlarmManager.shared.alarmUpdates {
+                let activeIDs = Set(alarms.map(\.id))
+                runningTimers.removeAll { !activeIDs.contains($0.id) }
+            }
+        }
     }
 
     private func isAuthorized() async throws -> Bool {

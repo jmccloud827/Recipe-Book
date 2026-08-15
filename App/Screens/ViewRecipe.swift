@@ -61,9 +61,9 @@ struct ViewRecipe: View {
     private var details: some View {
         VStack(alignment: .leading) {
             servingsAndCookTime
-            
+
             ingredients
-            
+
             steps
         }
         .padding()
@@ -176,7 +176,11 @@ struct ViewRecipe: View {
                             .bold()
                         
                         ForEach(section.steps.enumerated(), id: \.element.id) { index, step in
-                            makeStepLabel(step, ingredients: section.ingredients, index: index)
+                            VStack(alignment: .leading, spacing: 10) {
+                                ActiveTimersView(stepID: step.id)
+
+                                makeStepLabel(step, ingredients: section.ingredients, index: index)
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -205,7 +209,7 @@ struct ViewRecipe: View {
             
             HFlow(spacing: .init(width: 5, height: 0)) {
                 ForEach(step.getWordsWithAttributes().enumerated(), id: \.offset) { _, value in
-                    PopoverView(value: value)
+                    PopoverView(value: value, stepID: step.id)
                 }
             }
         }
@@ -295,6 +299,7 @@ private struct ShareSheet: UIViewControllerRepresentable {
 private struct PopoverView: View {
     @Environment(Recipe.Section.self) private var section
     let value: Step.WordGroup
+    let stepID: UUID
 
     @State private var isShowingPopover = false
 
@@ -322,7 +327,7 @@ private struct PopoverView: View {
             } else if color == .blue, let durations = value.durations {
                 button
                     .popover(isPresented: $isShowingPopover) {
-                        TimerPopoverContent(name: phrase, durations: durations)
+                        TimerPopoverContent(durations: durations, stepID: stepID)
                             .padding()
                             .presentationCompactAdaptation(.popover)
                     }
@@ -336,8 +341,8 @@ private struct PopoverView: View {
 }
 
 private struct TimerPopoverContent: View {
-    let name: String
     let durations: [Step.ParsedDuration]
+    let stepID: UUID
 
     @Environment(\.dismiss) private var dismiss
     @State private var errorMessage: String?
@@ -361,7 +366,7 @@ private struct TimerPopoverContent: View {
     private func startTimer(for duration: Step.ParsedDuration) {
         Task {
             do {
-                try await RecipeTimerManager.shared.startTimer(named: name, duration: duration.timeInterval)
+                try await RecipeTimerManager.shared.startTimer(named: duration.label, duration: duration.timeInterval, stepID: stepID)
                 dismiss()
             } catch RecipeTimerManager.TimerError.authorizationDenied {
                 errorMessage = "Allow alarms for Recipe Book in Settings to start timers."

@@ -12,5 +12,7 @@
 	<false/>
 	<key>NSAlarmKitUsageDescription</key>
 	<string>Recipe Book uses timers so you can get an alert on your Lock Screen when a cooking step is done.</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 </dict>
 </plist>
