@@ -42,7 +42,7 @@ extension Recipe {
         ]
         
         let servingSection = Section(belongsTo: recipe)
-        servingSection.name = "Cooke in the Oven"
+        servingSection.name = "Oven"
         servingSection.ingredients = [
             .init(belongsTo: servingSection, amount: "1", measurement: .packet, name: "mozzarella cheese"),
             .init(belongsTo: sauceSection, amount: "1", measurement: .packet, name: "pepperoni")

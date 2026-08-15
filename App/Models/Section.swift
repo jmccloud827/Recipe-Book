@@ -4,7 +4,7 @@ import SwiftUI
 extension Recipe {
     @Model class Section: Identifiable {
         var id = UUID()
-        var name: String = "Method"
+        var name: String = ""
         @Relationship(deleteRule: .cascade, inverse: \Ingredient.belongsTo) private var persistedIngredients: [Ingredient]? = []
         @Relationship(deleteRule: .cascade, inverse: \Step.belongsTo) private var persistedSteps: [Step]? = []
         var belongsTo: Recipe?

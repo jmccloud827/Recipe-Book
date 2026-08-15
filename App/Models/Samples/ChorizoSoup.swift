@@ -11,7 +11,7 @@ extension Recipe {
         recipe.photo = UIImage(resource: .chorizoSoup).pngData()
         
         let methodSection = Section(belongsTo: recipe)
-        methodSection.name = "Method"
+        methodSection.name = ""
         methodSection.ingredients = [
             .init(belongsTo: methodSection, amount: "2", measurement: .tablespoon, name: "olive oil"),
             .init(belongsTo: methodSection, amount: "1", measurement: .pound, name: "spicy sausage (chorizo or andouille)"),

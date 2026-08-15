@@ -11,7 +11,7 @@ extension Recipe {
         recipe.photo = UIImage(resource: .creamyItalianSausageDitalini).pngData()
         
         let methodSection = Section(belongsTo: recipe)
-        methodSection.name = "Method"
+        methodSection.name = ""
         methodSection.ingredients = [
             .init(belongsTo: methodSection, amount: "1", measurement: .pound, name: "Italian sausage"),
             .init(belongsTo: methodSection, amount: "1", measurement: .item, name: "onion (diced)"),

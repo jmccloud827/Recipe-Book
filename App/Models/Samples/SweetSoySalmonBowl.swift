@@ -29,7 +29,7 @@ extension Recipe {
         ]
         
         let methodSection = Section(belongsTo: recipe)
-        methodSection.name = "Method"
+        methodSection.name = "Cook"
         methodSection.ingredients = [
             .init(belongsTo: methodSection, amount: "16", measurement: .ounce, name: "broccoli"),
             .init(belongsTo: methodSection, amount: "1 1/2", measurement: .cup, name: "jasmine rice"),

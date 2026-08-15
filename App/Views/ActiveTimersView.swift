@@ -1,14 +1,14 @@
 import SwiftUI
 
-/// The running timer(s) for a single step, shown right above that step so they're visible in-app
-/// without checking the Lock Screen or Dynamic Island.
+/// The recipe's running timer(s), meant to be pinned to the top of the screen (via `.safeAreaInset`)
+/// so they stay visible no matter how far you scroll through the steps.
 struct ActiveTimersView: View {
-    let stepID: UUID
+    let stepIDs: Set<UUID>
 
     private let manager = TimerManager.shared
 
     private var timers: [TimerManager.RunningTimer] {
-        manager.runningTimers.filter { $0.stepID == stepID }
+        manager.runningTimers.filter { stepIDs.contains($0.stepID) }
     }
 
     var body: some View {
@@ -18,6 +18,7 @@ struct ActiveTimersView: View {
                     row(for: timer)
                 }
             }
+            .padding(.horizontal)
         }
     }
 
@@ -58,5 +59,5 @@ struct ActiveTimersView: View {
 }
 
 #Preview {
-    ActiveTimersView(stepID: UUID())
+    ActiveTimersView(stepIDs: [UUID()])
 }

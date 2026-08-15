@@ -32,12 +32,20 @@ struct ViewRecipe: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .safeAreaInset(edge: .top) {
+            ActiveTimersView(stepIDs: stepIDs)
+        }
         .sheet(item: $shareItem) { item in
             ShareSheet(url: item.url)
         }
         .alert("Couldn't Create PDF", isPresented: $isShowingShareError) {
             Button("OK", role: .cancel) {}
         }
+    }
+
+    /// Every step in this recipe, so the pinned timers bar can show timers for this recipe only.
+    private var stepIDs: Set<UUID> {
+        Set(recipe.sections.flatMap(\.steps).map(\.id))
     }
     
     @ViewBuilder private var image: some View {
@@ -172,15 +180,13 @@ struct ViewRecipe: View {
             VStack(alignment: .leading, spacing: 10) {
                 ForEach(recipe.sections, id: \.id) { section in
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(section.name)
-                            .bold()
+                        if !section.name.isEmpty {
+                            Text(section.name)
+                                .bold()
+                        }
                         
                         ForEach(section.steps.enumerated(), id: \.element.id) { index, step in
-                            VStack(alignment: .leading, spacing: 10) {
-                                ActiveTimersView(stepID: step.id)
-
-                                makeStepLabel(step, ingredients: section.ingredients, index: index)
-                            }
+                            makeStepLabel(step, ingredients: section.ingredients, index: index, sectionName: section.name)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -202,14 +208,22 @@ struct ViewRecipe: View {
         }
     }
     
-    private func makeStepLabel(_ step: Step, ingredients _: [Ingredient], index: Int) -> some View {
-        HStack(alignment: .firstTextBaseline) {
+    private func makeStepLabel(_ step: Step, ingredients _: [Ingredient], index: Int, sectionName: String) -> some View {
+        let trimmedSectionName = sectionName.trimmingCharacters(in: .whitespacesAndNewlines)
+        var timerName = ""
+        if !trimmedSectionName.isEmpty {
+            timerName += "\(trimmedSectionName) · "
+        }
+        
+        timerName += "Step \(index + 1)"
+
+        return HStack(alignment: .firstTextBaseline) {
             Image(systemName: "\(index + 1).circle.fill")
                 .foregroundStyle(.blue)
-            
+
             HFlow(spacing: .init(width: 5, height: 0)) {
                 ForEach(step.getWordsWithAttributes().enumerated(), id: \.offset) { _, value in
-                    PopoverView(value: value, stepID: step.id)
+                    PopoverView(value: value, stepID: step.id, timerName: timerName)
                 }
             }
         }
@@ -300,6 +314,7 @@ private struct PopoverView: View {
     @Environment(Recipe.Section.self) private var section
     let value: Step.WordGroup
     let stepID: UUID
+    let timerName: String
 
     @State private var isShowingPopover = false
 
@@ -327,7 +342,7 @@ private struct PopoverView: View {
             } else if color == .blue, let durations = value.durations {
                 button
                     .popover(isPresented: $isShowingPopover) {
-                        TimerPopoverContent(durations: durations, stepID: stepID)
+                        TimerPopoverContent(durations: durations, stepID: stepID, timerName: timerName)
                             .padding()
                             .presentationCompactAdaptation(.popover)
                     }
@@ -343,6 +358,7 @@ private struct PopoverView: View {
 private struct TimerPopoverContent: View {
     let durations: [Step.ParsedDuration]
     let stepID: UUID
+    let timerName: String
 
     @Environment(\.dismiss) private var dismiss
     @State private var errorMessage: String?
@@ -366,7 +382,7 @@ private struct TimerPopoverContent: View {
     private func startTimer(for duration: Step.ParsedDuration) {
         Task {
             do {
-                try await TimerManager.shared.startTimer(named: duration.label, duration: duration.timeInterval, stepID: stepID)
+                try await TimerManager.shared.startTimer(named: timerName, duration: duration.timeInterval, stepID: stepID)
                 dismiss()
             } catch TimerManager.TimerError.authorizationDenied {
                 errorMessage = "Allow alarms for Recipe Book in Settings to start timers."
