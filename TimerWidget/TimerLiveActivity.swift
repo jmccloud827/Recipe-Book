@@ -6,11 +6,11 @@ import WidgetKit
 
 /// Renders a running recipe timer on the Lock Screen, in the Dynamic Island, and in StandBy. AlarmKit
 /// requires a widget extension for any alarm that uses a countdown presentation (see
-/// `RecipeTimerManager`) — without one, the system can't display the live countdown and may not alert
+/// `TimerManager`) — without one, the system can't display the live countdown and may not alert
 /// at all.
-struct RecipeTimerLiveActivity: Widget {
+struct TimerLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: AlarmAttributes<RecipeTimerMetadata>.self) { context in
+        ActivityConfiguration(for: AlarmAttributes<TimerMetadata>.self) { context in
             lockScreenView(attributes: context.attributes, state: context.state)
                 .padding()
                 .background(.black.opacity(0.9))
@@ -53,7 +53,7 @@ struct RecipeTimerLiveActivity: Widget {
     }
 
     @ViewBuilder
-    private func lockScreenView(attributes: AlarmAttributes<RecipeTimerMetadata>, state: AlarmPresentationState) -> some View {
+    private func lockScreenView(attributes: AlarmAttributes<TimerMetadata>, state: AlarmPresentationState) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title(for: attributes))
@@ -70,7 +70,7 @@ struct RecipeTimerLiveActivity: Widget {
         }
     }
 
-    private func title(for attributes: AlarmAttributes<RecipeTimerMetadata>) -> LocalizedStringResource {
+    private func title(for attributes: AlarmAttributes<TimerMetadata>) -> LocalizedStringResource {
         attributes.presentation.countdown?.title ?? attributes.presentation.alert.title
     }
 

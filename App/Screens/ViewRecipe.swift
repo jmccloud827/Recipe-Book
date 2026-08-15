@@ -366,9 +366,9 @@ private struct TimerPopoverContent: View {
     private func startTimer(for duration: Step.ParsedDuration) {
         Task {
             do {
-                try await RecipeTimerManager.shared.startTimer(named: duration.label, duration: duration.timeInterval, stepID: stepID)
+                try await TimerManager.shared.startTimer(named: duration.label, duration: duration.timeInterval, stepID: stepID)
                 dismiss()
-            } catch RecipeTimerManager.TimerError.authorizationDenied {
+            } catch TimerManager.TimerError.authorizationDenied {
                 errorMessage = "Allow alarms for Recipe Book in Settings to start timers."
             } catch {
                 errorMessage = "Couldn't start the timer."

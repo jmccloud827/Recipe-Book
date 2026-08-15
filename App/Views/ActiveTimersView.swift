@@ -5,9 +5,9 @@ import SwiftUI
 struct ActiveTimersView: View {
     let stepID: UUID
 
-    private let manager = RecipeTimerManager.shared
+    private let manager = TimerManager.shared
 
-    private var timers: [RecipeTimerManager.RunningTimer] {
+    private var timers: [TimerManager.RunningTimer] {
         manager.runningTimers.filter { $0.stepID == stepID }
     }
 
@@ -21,7 +21,7 @@ struct ActiveTimersView: View {
         }
     }
 
-    private func row(for timer: RecipeTimerManager.RunningTimer) -> some View {
+    private func row(for timer: TimerManager.RunningTimer) -> some View {
         HStack {
             Image(systemName: "timer")
                 .foregroundStyle(.accent)
@@ -48,7 +48,7 @@ struct ActiveTimersView: View {
     }
 
     @ViewBuilder
-    private func countdown(for timer: RecipeTimerManager.RunningTimer) -> some View {
+    private func countdown(for timer: TimerManager.RunningTimer) -> some View {
         if timer.fireDate > .now {
             Text(timerInterval: Date.now ... timer.fireDate, countsDown: true)
         } else {

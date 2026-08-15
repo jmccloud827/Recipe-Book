@@ -5,8 +5,8 @@ import SwiftUI
 /// in the Dynamic Island, and in StandBy just like a timer started from the built-in Clock app —
 /// and keeps a live, in-app list of them so they're visible without leaving the app either.
 @Observable
-@MainActor final class RecipeTimerManager {
-    static let shared = RecipeTimerManager()
+@MainActor final class TimerManager {
+    static let shared = TimerManager()
 
     enum TimerError: Error {
         case authorizationDenied
@@ -42,7 +42,7 @@ import SwiftUI
         )
         let countdown = AlarmPresentation.Countdown(title: "\(name)")
         let presentation = AlarmPresentation(alert: alert, countdown: countdown, paused: nil)
-        let attributes = AlarmAttributes<RecipeTimerMetadata>(presentation: presentation, metadata: nil, tintColor: .accent)
+        let attributes = AlarmAttributes<TimerMetadata>(presentation: presentation, metadata: nil, tintColor: .accent)
 
         let id = UUID()
         _ = try await AlarmManager.shared.schedule(
