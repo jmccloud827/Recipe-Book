@@ -21,11 +21,11 @@ extension Recipe {
             .init(belongsTo: glazeSection, amount: "2", measurement: .teaspoon, name: "cornstarch")
         ]
         glazeSection.steps = [
-            .init(belongsTo: glazeSection, text: "In a small saucepan over medium heat, whisk the soy sauce, mirin, sugar, and vinegar. Bring to a simmer and cook for 2 to 3 minutes, stirring until the sugar is dissolved."),
-            .init(belongsTo: glazeSection, text: "As the glaze simmers, in a small bowl or liquid measuring cup, whisk the water and cornstarch."),
-            .init(belongsTo: glazeSection, text: "Whisk the cornstarch mixture into the glaze and continue to simmer for about 5 minutes, until slightly thickened."),
-            .init(belongsTo: glazeSection, text: "Transfer the glaze to a heatproof jar and let cool completely."),
-            .init(belongsTo: glazeSection, text: "The glaze can be good for 2 weeks. Store in the jar in the refrigerator.")
+            .init(belongsTo: glazeSection, text: "In a small saucepan over medium heat, whisk the soy sauce, mirin, sugar, and vinegar. Bring to a simmer and cook for 2 to 3 minutes, stirring until the sugar is dissolved"),
+            .init(belongsTo: glazeSection, text: "As the glaze simmers, in a small bowl or liquid measuring cup, whisk the water and cornstarch"),
+            .init(belongsTo: glazeSection, text: "Whisk the cornstarch mixture into the glaze and continue to simmer for about 5 minutes, until slightly thickened"),
+            .init(belongsTo: glazeSection, text: "Transfer the glaze to a heatproof jar and let cool completely"),
+            .init(belongsTo: glazeSection, text: "The glaze can be good for 2 weeks. Store in the jar in the refrigerator")
         ]
         
         let methodSection = Section(belongsTo: recipe)

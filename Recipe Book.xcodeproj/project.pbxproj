@@ -24,11 +24,6 @@
 		304852802D7242AA00EE5682 /* RecipeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3048527F2D7242AA00EE5682 /* RecipeList.swift */; };
 		304852862D72558100EE5682 /* ViewRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304852852D72558100EE5682 /* ViewRecipe.swift */; };
 		309C11ED2F363FA900EFD143 /* HFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11EA2F363FA900EFD143 /* HFlow.swift */; };
-		309C11EE2F363FA900EFD143 /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11E42F363FA900EFD143 /* FlowLayout.swift */; };
-		309C11F02F363FA900EFD143 /* LineBreaking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11E52F363FA900EFD143 /* LineBreaking.swift */; };
-		309C11F12F363FA900EFD143 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11E62F363FA900EFD143 /* Size.swift */; };
-		309C11F22F363FA900EFD143 /* VFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11EB2F363FA900EFD143 /* VFlow.swift */; };
-		309C11F32F363FA900EFD143 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C11E92F363FA900EFD143 /* Extensions.swift */; };
 		30A124492F2D3D9B00AC99A0 /* FancyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A124482F2D3D9B00AC99A0 /* FancyHeader.swift */; };
 		30C72AF62F4A1D3A00694B1B /* SweetSoySalmonBowl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C72AF52F4A1D3A00694B1B /* SweetSoySalmonBowl.swift */; };
 		30EF6EBE2F3A4047004DCF39 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EF6EBD2F3A4047004DCF39 /* Section.swift */; };
@@ -71,7 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		302494122DAD917D00101911 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+		302494122DAD917D00101911 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		303982852F40C0B4002A3B55 /* CreamyItalianSausageDitalini.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreamyItalianSausageDitalini.swift; sourceTree = "<group>"; };
 		303982872F40C3B8002A3B55 /* ChorizoSoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChorizoSoup.swift; sourceTree = "<group>"; };
 		303982892F40C801002A3B55 /* ChorizoRiceSkillet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChorizoRiceSkillet.swift; sourceTree = "<group>"; };
@@ -89,12 +84,7 @@
 		304852732D721C4A00EE5682 /* TextInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		3048527F2D7242AA00EE5682 /* RecipeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeList.swift; sourceTree = "<group>"; };
 		304852852D72558100EE5682 /* ViewRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRecipe.swift; sourceTree = "<group>"; };
-		309C11E42F363FA900EFD143 /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
-		309C11E52F363FA900EFD143 /* LineBreaking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineBreaking.swift; sourceTree = "<group>"; };
-		309C11E62F363FA900EFD143 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		309C11E92F363FA900EFD143 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		309C11EA2F363FA900EFD143 /* HFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HFlow.swift; sourceTree = "<group>"; };
-		309C11EB2F363FA900EFD143 /* VFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VFlow.swift; sourceTree = "<group>"; };
 		30A124482F2D3D9B00AC99A0 /* FancyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyHeader.swift; sourceTree = "<group>"; };
 		30C72AF52F4A1D3A00694B1B /* SweetSoySalmonBowl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SweetSoySalmonBowl.swift; sourceTree = "<group>"; };
 		30EF6EBD2F3A4047004DCF39 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -131,6 +121,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3014B2AA3038E1FC004FD89E /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				30484FE42D6E58DD00EE5682 /* Assets.xcassets */,
+				30415C222D947531006A2135 /* Info.plist */,
+				302494122DAD917D00101911 /* Entitlements.entitlements */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		30415C162D942CB1006A2135 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,7 +140,6 @@
 				30EF6EC12F3A4080004DCF39 /* Step.swift */,
 				8AC4B6265D0F99A654838405 /* TimerManager.swift */,
 				4F4331B295047F8D212056AA /* TimerMetadata.swift */,
-				30EF6ED12F3B7A0F004DCF39 /* Samples */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,7 +147,7 @@
 		30415C172D942CD4006A2135 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				309C11EC2F363FA900EFD143 /* Flow */,
+				309C11EA2F363FA900EFD143 /* HFlow.swift */,
 				3043AE442D7640F900BC3EB4 /* RecipePDFView.swift */,
 				304852732D721C4A00EE5682 /* TextInputField.swift */,
 				30484FFE2D6F48B000EE5682 /* ImagePicker.swift */,
@@ -195,24 +194,10 @@
 				30415C182D942CF4006A2135 /* Screens */,
 				30415C172D942CD4006A2135 /* Views */,
 				30415C162D942CB1006A2135 /* Models */,
-				30484FE42D6E58DD00EE5682 /* Assets.xcassets */,
-				30415C222D947531006A2135 /* Info.plist */,
-				302494122DAD917D00101911 /* App.entitlements */,
+				30EF6ED12F3B7A0F004DCF39 /* Samples */,
+				3014B2AA3038E1FC004FD89E /* Other */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		309C11EC2F363FA900EFD143 /* Flow */ = {
-			isa = PBXGroup;
-			children = (
-				309C11EA2F363FA900EFD143 /* HFlow.swift */,
-				309C11EB2F363FA900EFD143 /* VFlow.swift */,
-				309C11E42F363FA900EFD143 /* FlowLayout.swift */,
-				309C11E52F363FA900EFD143 /* LineBreaking.swift */,
-				309C11E62F363FA900EFD143 /* Size.swift */,
-				309C11E92F363FA900EFD143 /* Extensions.swift */,
-			);
-			path = Flow;
 			sourceTree = "<group>";
 		};
 		30EF6ED12F3B7A0F004DCF39 /* Samples */ = {
@@ -360,11 +345,6 @@
 				303982882F40C3B8002A3B55 /* ChorizoSoup.swift in Sources */,
 				309C11ED2F363FA900EFD143 /* HFlow.swift in Sources */,
 				30EF6EC82F3A87E6004DCF39 /* Extension.swift in Sources */,
-				309C11EE2F363FA900EFD143 /* FlowLayout.swift in Sources */,
-				309C11F02F363FA900EFD143 /* LineBreaking.swift in Sources */,
-				309C11F12F363FA900EFD143 /* Size.swift in Sources */,
-				309C11F22F363FA900EFD143 /* VFlow.swift in Sources */,
-				309C11F32F363FA900EFD143 /* Extensions.swift in Sources */,
 				30484FE12D6E58DC00EE5682 /* App.swift in Sources */,
 				304852742D721C4A00EE5682 /* TextInputField.swift in Sources */,
 				304852802D7242AA00EE5682 /* RecipeList.swift in Sources */,
@@ -537,13 +517,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = App/Other/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_FILE = App/Other/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Book";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -570,13 +550,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
+				CODE_SIGN_ENTITLEMENTS = App/Other/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_FILE = App/Other/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Recipe Book";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

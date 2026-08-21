@@ -54,7 +54,7 @@ struct RecipeList: View {
     }
 
     private func recipeGrid(_ recipes: [Recipe], canEdit: Bool) -> some View {
-        HFlow(spacing: .init(width: 20, height: 20), distributeItemsEvenly: true) {
+        HFlow(spacing: .init(width: 20, height: 20)) {
             ForEach(recipes, id: \.id) { recipe in
                 RecipeLink(recipe: recipe, namespace: namespace) { recipe in
                     recipeToView = RecipeSelection(recipe: recipe, canEdit: canEdit)
